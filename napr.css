@@ -8,8 +8,7 @@
 .dhero h1 { font-size: 52px; margin-bottom: 24px; }
 .dhero .lead { font-size: 20px; color: var(--muted); margin-bottom: 36px; max-width: 30em; }
 .dhero .cta { display: flex; align-items: center; gap: 32px; }
-.dhero .imgw { border-radius: var(--r); }
-.dhero .imgw img { aspect-ratio: 4/3; }
+.dhero > .photo-ph { aspect-ratio: 4/3; border-radius: var(--r); font-size: 14px; }
 
 .ptasks { display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid var(--line); }
 .ptasks > div { display: grid; grid-template-columns: 48px 1fr; gap: 16px; padding: 24px 24px 24px 0; border-bottom: 1px solid var(--line); }
@@ -88,7 +87,8 @@
 .odirs { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
 .odirs a { display: grid; grid-template-columns: 160px 1fr; height: 160px; border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; background: #fff; transition: border-color .2s; }
 .odirs a:hover { border-color: var(--accent); }
-.odirs img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.odirs .photo-ph { display: grid; height: 100%; aspect-ratio: auto; padding: 8px; font-size: 11px; border-right: 1px solid var(--line); }
+.odirs .photo-ph span { max-width: 100%; padding: 4px 6px; }
 .odirs div { padding: 24px; display: flex; flex-direction: column; justify-content: center; gap: 8px; }
 .odirs small { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--mark); }
 .odirs h3 { font-size: 21px; }
@@ -100,7 +100,7 @@
   .dhero .lead { font-size: 17px; margin-bottom: 24px; }
   .dhero .cta { flex-direction: column; align-items: stretch; gap: 18px; }
   .dhero .cta .link { align-self: flex-start; }
-  .dhero .imgw { order: -1; margin: 0 -20px; border-radius: 0; }
+  .dhero > .photo-ph { order: -1; margin: 0 -20px; border-radius: 0; font-size: 12px; }
   .ptasks { grid-template-columns: 1fr; }
   .ptasks > div, .ptasks > div:nth-child(even) { grid-template-columns: 36px 1fr; padding: 18px 0; border-right: 0; }
   .ptasks h3 { font-size: 17px; }

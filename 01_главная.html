@@ -8,7 +8,7 @@
 <style>
 .hero { position: relative; border-bottom: 1px solid var(--line); }
 .hero-img { position: absolute; inset: 0 0 0 52%; }
-.hero-img img { height: 100%; }
+.hero-img .photo-ph { height: 100%; aspect-ratio: auto; font-size: 15px; }
 .hero-in { position: relative; display: flex; min-height: 600px; }
 .hero-panel { background: #fff; width: 54%; padding: 88px 56px 88px 0; display: flex; flex-direction: column; justify-content: center; position: relative; }
 .hero-panel::before { content: ""; position: absolute; top: 0; bottom: 0; right: 100%; width: 100vw; background: #fff; }
@@ -29,7 +29,7 @@
 .dirs { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--line); background: #fff; }
 .dir { display: flex; flex-direction: column; border-right: 1px solid var(--line); }
 .dir:last-child { border-right: 0; }
-.dir img { aspect-ratio: 4/3; filter: saturate(.85); }
+.dir .photo-ph { aspect-ratio: 4/3; border-bottom: 1px solid var(--line); }
 .dir-body { padding: 32px; display: flex; flex-direction: column; flex: 1; }
 .dir h3 { font-size: 26px; line-height: 1.2; margin-bottom: 14px; }
 .dir p { font-size: 16px; color: var(--muted); margin-bottom: 28px; }
@@ -103,7 +103,7 @@
 
 @media (max-width: 767px) {
   .hero-img { position: relative; inset: auto; }
-  .hero-img img { aspect-ratio: 4/3; height: auto; }
+  .hero-img .photo-ph { aspect-ratio: 4/3; height: auto; font-size: 13px; }
   .hero-in { min-height: 0; }
   .hero-panel { width: 100%; padding: 32px 0 48px; }
   .hero .eyebrow { margin-bottom: 18px; }
@@ -163,7 +163,7 @@
 </head>
 <body>
 <a class="skip" href="#main">Перейти к содержанию</a>
-<div class="mock">МАКЕТ · шаг 2 · направление Б · пунктирная рамка — плейсхолдер текста, не публиковать · фото — временные иллюстрации и серые заглушки</div>
+<div class="mock">МАКЕТ · шаг 2 · направление Б · пунктирная рамка — плейсхолдер текста, не публиковать · фото — серые заглушки с описанием кадра</div>
 
 <header>
   <div class="wrap hd">
@@ -179,7 +179,7 @@
 
 <main id="main">
   <section class="hero">
-    <div class="hero-img imgw"><img src="img_только_для_макета/01_hero.jpg" alt="Временная иллюстрация: ЭЭГ-исследование в лаборатории" style="object-position: 70% 50%"><span class="tmp">ВРЕМЕННАЯ ИЛЛЮСТРАЦИЯ · НЕ ПУБЛИКОВАТЬ<small>Заменить на фото: ЭЭГ-исследование в лаборатории НИИ</small></span></div>
+    <div class="hero-img"><div class="photo-ph"><span>Фото первого экрана: ЭЭГ-исследование в лаборатории НИИ — участник в ЭЭГ-шапочке перед монитором, рядом исследователь у системы записи<br>реальная съёмка, горизонталь от 1920 px, главное — в правой части кадра</span></div></div>
     <div class="wrap hero-in">
       <div class="hero-panel">
         <div class="eyebrow">Научно-исследовательский институт нейронаук</div>
@@ -209,11 +209,11 @@
     <div class="wrap">
       <div class="sec-head"><div><div class="sec-num">Направления</div><h2>Направления прикладных исследований</h2></div><p class="sub ph">От нейрофизиологической оценки до исследований поведения потребителей — полным циклом, от гипотезы до прототипа.</p></div>
       <div class="dirs">
-        <a class="dir" href="07_направление_нейродиагностика.html"><div class="imgw"><img src="img_только_для_макета/02_нейродиагностика.jpg" alt="Временная иллюстрация: нейродиагностика"><span class="tmp">ВРЕМЕННАЯ ИЛЛЮСТРАЦИЯ<small>Заменить на фото лаборатории</small></span></div><div class="dir-body"><h3>Нейродиагностика и мониторинг</h3><p class="ph">Исследование функционального состояния нервной системы: ЭЭГ, айтрекинг, биосигналы, когнитивный скрининг, мониторинг сна.</p>
+        <a class="dir" href="07_направление_нейродиагностика.html"><div class="photo-ph"><span>Фото: регистрация ЭЭГ или айтрекинг в лаборатории НИИ — оборудование и исследователь за работой<br>реальная съёмка, 4:3</span></div><div class="dir-body"><h3>Нейродиагностика и мониторинг</h3><p class="ph">Исследование функционального состояния нервной системы: ЭЭГ, айтрекинг, биосигналы, когнитивный скрининг, мониторинг сна.</p>
           <span class="btn-sec dir-more">Подробнее</span></div></a>
-        <a class="dir" href="08_направление_реабилитация.html"><div class="imgw"><img src="img_только_для_макета/03_реабилитация.jpg" alt="Временная иллюстрация: реабилитация"><span class="tmp">ВРЕМЕННАЯ ИЛЛЮСТРАЦИЯ<small>Заменить на фото лаборатории</small></span></div><div class="dir-body"><h3>Реабилитация</h3><p class="ph">Технологии и объективная оценка для реабилитации: анализ движений, VR-среда, биологическая обратная связь, нейроинтерфейсы.</p>
+        <a class="dir" href="08_направление_реабилитация.html"><div class="photo-ph"><span>Фото: занятие в VR-среде или анализ движений — VR-шлем, тактильная перчатка, экран с моделью движения<br>реальная съёмка, 4:3, без узнаваемых лиц пациентов</span></div><div class="dir-body"><h3>Реабилитация</h3><p class="ph">Технологии и объективная оценка для реабилитации: анализ движений, VR-среда, биологическая обратная связь, нейроинтерфейсы.</p>
           <span class="btn-sec dir-more">Подробнее</span></div></a>
-        <a class="dir" href="09_направление_нейромаркетинг.html"><div class="imgw"><img src="img_только_для_макета/05_нейромаркетинг.jpg" alt="Временная иллюстрация: нейромаркетинг"><span class="tmp">ВРЕМЕННАЯ ИЛЛЮСТРАЦИЯ<small>Заменить на фото лаборатории</small></span></div><div class="dir-body"><h3>Нейромаркетинг</h3><p class="ph">Как люди реагируют на рекламу, упаковку, сайт и сервис: ЭЭГ, биометрия, айтрекинг — три источника данных.</p>
+        <a class="dir" href="09_направление_нейромаркетинг.html"><div class="photo-ph"><span>Фото: айтрекинг-исследование — участник смотрит на сайт или рекламу, на втором мониторе карта взгляда<br>реальная съёмка, 4:3, без логотипов заказчиков</span></div><div class="dir-body"><h3>Нейромаркетинг</h3><p class="ph">Как люди реагируют на рекламу, упаковку, сайт и сервис: ЭЭГ, биометрия, айтрекинг — три источника данных.</p>
           <span class="btn-sec dir-more">Подробнее</span></div></a>
       </div>
     </div>
