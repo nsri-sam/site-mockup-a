@@ -45,7 +45,7 @@ a { color: inherit; text-decoration: none; }
 header { position: sticky; top: 0; z-index: 5; background: rgba(255,255,255,.96); border-bottom: 1px solid var(--line); }
 .hd { display: flex; align-items: center; gap: 16px; height: 80px; white-space: nowrap; }
 .logo { display: flex; align-items: center; gap: 14px; }
-.logo-samsmu { width: 44px; height: 44px; background: #fff; border: 1px solid var(--accent); display: grid; place-items: center; font-size: 9px; color: var(--accent); text-align: center; line-height: 1.1; flex: none; }
+.logo-samsmu { display: block; width: auto; height: 52px; flex: none; }
 .logo-name { font-weight: 700; font-size: 17px; line-height: 1.15; letter-spacing: -.01em; padding-left: 14px; border-left: 2px solid var(--accent); }
 .logo-name small { display: block; font-weight: 500; font-size: 12px; color: var(--muted); letter-spacing: 0; }
 nav { display: flex; gap: 12px; font-size: 15px; font-weight: 600; }
@@ -207,13 +207,13 @@ html.modal-open { overflow: hidden; }
 footer { background: var(--foot); color: var(--foot-text); padding: 72px 0 32px; font-size: 15px; }
 footer .logo-name { color: #fff; }
 footer .logo-name small { color: var(--foot-text); }
-footer .logo-samsmu { background: #fff; border-color: #fff; color: var(--accent); }
+footer .logo-samsmu { box-sizing: content-box; background: #fff; padding: 8px 10px; border-radius: var(--r); }
 .ft { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.3fr; gap: 48px; }
-.ft h4 { color: #fff; font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 16px; }
+.ft h4 { font-family: "Open Sans", sans-serif; color: #fff; font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 16px; }
 .ft ul { list-style: none; display: grid; gap: 10px; }
 .ft a:hover { color: #fff; }
-footer .chi { background: transparent; border-color: #4A4460; color: #fff; }
-.ft-bottom { margin-top: 56px; padding-top: 24px; border-top: 1px solid #3A3450; display: flex; justify-content: space-between; gap: 24px; font-size: 13px; }
+footer .chi { background: transparent; border-color: #3091D1; color: #fff; }
+.ft-bottom { margin-top: 56px; padding-top: 24px; border-top: 1px solid #3091D1; display: flex; justify-content: space-between; gap: 24px; font-size: 13px; }
 
 @media (max-width: 767px) {
   body { font-size: 16px; }
@@ -225,7 +225,7 @@ footer .chi { background: transparent; border-color: #4A4460; color: #fff; }
   #menu.open a.on { border-bottom-color: var(--line); color: var(--accent); }
   #menu.open .nav-cta { display: inline-flex; margin-top: 16px; padding: 16px 24px; border-bottom: 0; color: #fff; }
   .hd { height: 64px; gap: 12px; white-space: normal; }
-  .logo-samsmu { width: 38px; height: 38px; }
+  .logo-samsmu { height: 42px; }
   .logo-name { font-size: 15px; padding-left: 10px; }
   .tmp { font-size: 10px; left: 8px; bottom: 8px; }
   section.block { padding: 56px 0; }
