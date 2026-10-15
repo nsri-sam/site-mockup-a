@@ -13,7 +13,8 @@
 .hero-panel { background: #fff; width: 54%; padding: 88px 56px 88px 0; display: flex; flex-direction: column; justify-content: center; position: relative; }
 .hero-panel::before { content: ""; position: absolute; top: 0; bottom: 0; right: 100%; width: 100vw; background: #fff; }
 .hero .eyebrow { margin-bottom: 28px; }
-.hero h1 { margin-bottom: 28px; }
+/* «нейроисследования:» — одно слово шириной ~10,9 em, кегль следует за шириной колонки */
+.hero h1 { margin-bottom: 28px; font-size: clamp(28px, calc(4.4vw - 6px), 52px); }
 .hero h1 em { font-style: normal; color: var(--accent); }
 .lead { font-size: 20px; color: var(--muted); max-width: 28em; margin-bottom: 40px; }
 .hero-cta { display: flex; align-items: center; gap: 32px; }
@@ -63,7 +64,7 @@
 .tl li:last-child { padding-bottom: 0; }
 .tl li:last-child::after { display: none; }
 .tl li.now::before { background: var(--accent); }
-.tl-y { font-family: "Open Sans", sans-serif; font-weight: 700; font-size: 18px; line-height: 1.35; color: var(--accent); }
+.tl-y { font-family: "Montserrat", sans-serif; font-weight: 700; font-size: 18px; line-height: 1.35; color: var(--accent); }
 .tl .more-l { display: inline-block; margin-top: 8px; font-size: 15px; font-weight: 700; color: var(--accent); border-bottom: 1.5px solid var(--mark); padding-bottom: 1px; }
 .gzd .hist-src { font-size: 13px; margin-top: 20px; }
 
@@ -107,7 +108,7 @@
   .hero-in { min-height: 0; }
   .hero-panel { width: 100%; padding: 32px 0 48px; }
   .hero .eyebrow { margin-bottom: 18px; }
-  .hero h1 { margin-bottom: 18px; }
+  .hero h1 { margin-bottom: 18px; font-size: clamp(24px, 7.4vw, 30px); }
   .lead { font-size: 17px; margin-bottom: 28px; }
   .hero-cta { flex-direction: column; align-items: stretch; gap: 18px; }
   .hero-cta .link { align-self: flex-start; }
