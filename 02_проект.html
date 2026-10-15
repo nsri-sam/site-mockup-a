@@ -23,11 +23,16 @@
 .cover { margin: 0; }
 .cover .photo-ph { aspect-ratio: 16/9; border-radius: var(--photo-radius); }
 
-.body { display: grid; grid-template-columns: 240px 1fr; gap: 80px; padding-top: 80px; padding-bottom: 96px; }
-.toc { position: sticky; top: 104px; align-self: start; display: grid; gap: 2px; font-size: 15px; font-weight: 600; }
-.toc a { padding: 8px 0 8px 14px; border-left: 2px solid var(--line); color: var(--muted); }
-.toc a.on { border-color: var(--accent); color: var(--text); }
-.art { display: grid; gap: 64px; max-width: 780px; }
+/* тело страницы: паттерн 06 «Изолинии» на всю ширину окна заполняет пустое место по бокам и под оглавлением;
+   оглавление и статья — на сплошных белых панелях; сверху паттерн растворяется, чтобы не стыковаться со «Схемой» шапки */
+.body { display: grid; grid-template-columns: 240px 1fr; gap: 48px; padding-top: 64px; padding-bottom: 96px; position: relative; isolation: isolate; }
+.body::before { content: ""; position: absolute; z-index: -1; pointer-events: none; top: 0; bottom: 0; left: calc(50% - 50cqw); right: calc(50% - 50cqw);
+  background: url("patterns/06_izolinii_B.svg") 0 0/var(--pat-size) repeat; opacity: var(--pat-opacity-zone);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 96px); mask-image: linear-gradient(to bottom, transparent 0, #000 96px); }
+.toc { position: sticky; top: 104px; align-self: start; display: grid; gap: 2px; font-size: 15px; font-weight: 600; background: #fff; padding: 16px 20px; border: 1px solid var(--line); border-radius: var(--r-lg); box-shadow: var(--sh-md); }
+.toc a { padding: 8px 0 8px 14px; border-bottom: 0; border-left: 2px solid var(--line); color: var(--muted); }
+.toc a.on { border-left-color: var(--accent); color: var(--text); }
+.art { display: grid; gap: 64px; min-width: 0; background: #fff; padding: 56px 64px 64px; border: 1px solid var(--line); border-radius: var(--r-lg); box-shadow: var(--sh-md); }
 .art section h2 { font-size: 30px; margin-bottom: 20px; }
 .art .sec-num { margin-bottom: 8px; }
 .art p { font-size: 18px; }
@@ -115,11 +120,14 @@
   .mi-note { flex-direction: column; gap: 6px; font-size: 14px; }
   .spec { padding: 36px 0 48px; }
   .spec-grid, .st-demo { grid-template-columns: 1fr; }
+  .mini .mf { grid-template-columns: 1fr; }
+  .mini .mf div { padding: 6px 0 0; }
   .spec-card { padding: 18px; }
   .cover .photo-ph { aspect-ratio: 16/9; }
-  .body { grid-template-columns: 1fr; gap: 0; padding-top: 48px; padding-bottom: 56px; }
+  .body { grid-template-columns: 1fr; gap: 0; padding: 32px 12px 48px; }
+  .body::before { -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 32px); mask-image: linear-gradient(to bottom, transparent 0, #000 32px); }
   .toc { display: none; }
-  .art { gap: 44px; }
+  .art { gap: 44px; padding: 28px 20px 36px; }
   .art section h2 { font-size: 24px; margin-bottom: 14px; }
   .art p { font-size: 16px; }
   .methods { grid-template-columns: 1fr; }
@@ -138,10 +146,12 @@
 
 @media (min-width: 768px) and (max-width: 1023px) {
   .phead h1 { font-size: 44px; }
-  .body { grid-template-columns: 1fr; gap: 0; padding-top: 56px; padding-bottom: 72px; }
+  .body { grid-template-columns: 1fr; gap: 0; padding-top: 48px; padding-bottom: 72px; }
+  .art { padding: 40px 40px 48px; }
   .toc { display: none; }
   .cta-band .in { flex-direction: column; align-items: flex-start; gap: 24px; }
 }
+@media (min-width: 1024px) and (max-width: 1199px) { .art { padding: 48px 40px 56px; } }
 </style>
 </head>
 <body>
