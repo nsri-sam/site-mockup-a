@@ -1,0 +1,44 @@
+/* Дизайн-токены СамГМУ для НИИ нейронаук, версия 2 (макет Б, палитра Б «Лабораторная строгость»).
+   Цвета брендбука: «Руководство по использованию фирменного стиля» СамГМУ, с. 11; шрифты: с. 10.
+   Палитра Б и цвета паттернов: Лист_решений_дизайнера_оформление_каналов_15.10.26.md, раздел 4,
+   и 08_Паттерны/Паттерны_лист_решений_15.10.26.md, «Цвет и контраст». Новых цветов нет. */
+:root{
+  /* Брендбук */
+  --sm-blue:#006CB4;        /* основной цвет; 5,5:1 на белом */
+  --sm-blue-light:#3091D1;  /* единственный акцент: активные состояния, линии, шкала времени, кольца шагов. НЕ для текста (3,4:1) */
+  --sm-black:#000000; --sm-gray:#EDEDED; --sm-white:#FFFFFF;
+  /* Палитра Б (лист решений дизайнера) */
+  --pb-text:#111111;        /* текст, 18,9:1 */
+  --pb-text-2:#4D4D4D;      /* второстепенный, 8,5:1 / 7,2:1 на #EDEDED */
+  --pb-blue-dark:#004E82;   /* наведение и тёмные плашки, 8,7:1 */
+  --pb-error:#B3261E; --pb-error-bg:#FDF1F0; /* служебные, из макета Б */
+  /* Цвета паттернов палитры Б: используются только внутри SVG-файлов, в интерфейсе не применяются */
+  --pat-line:#BAD5E9; --pat-accent:#6EA5CE; --pat-grid:#E2EDF6;
+
+  /* Роли */
+  --c-text:var(--pb-text); --c-text-muted:var(--pb-text-2);
+  --c-primary:var(--sm-blue); --c-primary-hover:var(--pb-blue-dark);
+  --c-accent:var(--sm-blue-light); --c-line:var(--sm-blue-light);
+  --c-bg:var(--sm-white); --c-band:var(--sm-gray);
+  /* Градиент только на мелких деталях: черта надзаголовка, линия над цифрами, линия цикла, полоса под шапкой, кольца шагов */
+  --g-brand:linear-gradient(90deg,#006CB4 0%,#3091D1 100%);
+  --g-strip-h:3px;
+
+  /* Паттерны: масштаб 1:1 (плитка 600 px) по листу решений, тихая непрозрачность */
+  --pat-size:600px; --pat-opacity-hero:.55; --pat-opacity-band:.5; --pat-opacity-zone:.45;
+
+  /* Фото */
+  --photo-radius:12px; --photo-hero-tint:rgba(0,108,180,.08);
+  --photo-tag-bg:var(--sm-blue); --photo-tag-text:#FFFFFF; /* 5,5:1 */
+
+  /* Шрифты (брендбук, с. 10): Montserrat — заголовки, Open Sans — текст */
+  --font-display:"Montserrat",Arial,sans-serif; --font-text:"Open Sans",Arial,sans-serif;
+  --fs-h1:56px; --fs-h2:40px; --fs-h3:24px; --fs-body:18px; --fs-small:16px; --fs-caption:14px; --fs-overline:14px;
+  --lh-body:1.6; --ls-overline:.12em;
+  /* Отступы, радиусы, тени, размеры */
+  --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:24px; --sp-6:32px; --sp-7:48px; --sp-8:64px; --sp-9:96px;
+  --r-sm:4px; --r-md:8px; --r-lg:12px;
+  --sh-md:0 4px 14px rgba(0,0,0,.06); --sh-lg:0 12px 32px rgba(0,0,0,.10);
+  --target-min:48px; --focus:0 0 0 3px rgba(0,108,180,.35);
+}
+@media (max-width:767px){:root{--fs-h1:30px;--fs-h2:28px;--fs-h3:20px;--fs-body:16px;--fs-overline:13px}}

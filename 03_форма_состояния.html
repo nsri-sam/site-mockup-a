@@ -10,10 +10,10 @@ body { background: var(--band); font-size: 16px; }
 .board { max-width: 1400px; margin: 0 auto; padding: 40px 20px 64px; }
 .board > h1 { font-size: 32px; margin-bottom: 8px; }
 .board > p { color: var(--muted); margin-bottom: 36px; }
-.frames { display: grid; grid-template-columns: repeat(3, 360px); gap: 48px 60px; justify-content: center; align-items: start; }
-.cap { font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--mark); margin-bottom: 10px; }
+.frames { display: grid; grid-template-columns: repeat(auto-fit, minmax(0, 360px)); gap: 48px 60px; justify-content: center; align-items: start; }
+.cap { font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
 .cap span { display: block; color: var(--muted); font-weight: 600; letter-spacing: 0; text-transform: none; font-size: 14px; margin-top: 2px; }
-.phone { width: 360px; background: #fff; border: 1px solid var(--line); box-shadow: 0 1px 0 var(--line); overflow: hidden; }
+.phone { width: 100%; max-width: 360px; background: #fff; border: 1px solid var(--line); box-shadow: 0 1px 0 var(--line); overflow: hidden; }
 .m-hd { display: flex; align-items: center; justify-content: space-between; height: 64px; padding: 0 20px; border-bottom: 1px solid var(--line); }
 .m-hd .logo-samsmu { height: 42px; }
 .m-hd .logo-nii { width: 36px; height: 36px; }
@@ -33,7 +33,7 @@ body { background: var(--band); font-size: 16px; }
 .ok { padding: 40px 20px 36px; display: grid; gap: 20px; }
 .ok .mark { width: 56px; height: 56px; border-radius: 50%; background: var(--accent); color: #fff; display: grid; place-items: center; font-size: 26px; font-weight: 700; }
 .ok h2 { font-size: 28px; }
-.ok .num { border-top: 2px solid var(--text); padding-top: 14px; display: grid; gap: 4px; }
+.ok .num { border-top: 4px solid transparent; border-image: var(--g-brand) 1; padding-top: 14px; display: grid; gap: 4px; }
 .ok .num small { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
 .ok .num b { font-size: 22px; letter-spacing: .02em; }
 .ok p { font-size: 16px; color: var(--muted); }

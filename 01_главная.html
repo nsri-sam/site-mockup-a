@@ -3,15 +3,22 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Главная — макет сайта, вариант Б</title>
+<title>Главная — макет сайта, вариант А</title>
 <link rel="stylesheet" href="b.css">
 <style>
 .hero { position: relative; border-bottom: 1px solid var(--line); }
-.hero-img { position: absolute; inset: 0 0 0 52%; }
-.hero-img .photo-ph { height: 100%; aspect-ratio: auto; font-size: 15px; }
+.hero-img { position: absolute; inset: 24px 0 24px 52%; }
+.hero-img .photo-ph { height: 100%; aspect-ratio: auto; font-size: 15px; border-radius: var(--photo-radius) 0 0 var(--photo-radius); }
+.hero-img .photo-ph::before { content: ""; position: absolute; inset: 0; background: var(--photo-hero-tint); pointer-events: none; }
+.hero-img .photo-ph::after { content: "Фото: реальная лабораторная съёмка, без фильтров · лёгкий тон #006CB4 только здесь"; }
 .hero-in { position: relative; display: flex; min-height: 600px; }
-.hero-panel { background: #fff; width: 54%; padding: 88px 56px 88px 0; display: flex; flex-direction: column; justify-content: center; position: relative; }
+.hero-panel { width: 54%; padding: 88px 56px 88px 0; display: flex; flex-direction: column; justify-content: center; position: relative; isolation: isolate; }
 .hero-panel::before { content: ""; position: absolute; top: 0; bottom: 0; right: 100%; width: 100vw; background: #fff; }
+/* паттерн 07 «Схема» — только в пустых полосах сверху и снизу текстовой колонки, не под фото и не под текстом */
+.hero-panel::after { content: ""; position: absolute; z-index: -1; top: 0; bottom: 0; right: 0; left: -100vw; pointer-events: none;
+  background: url("patterns/07_shema_B.svg") 0 0/var(--pat-size) repeat; opacity: var(--pat-opacity-hero);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0, #000 48px, transparent 84px, transparent calc(100% - 84px), #000 calc(100% - 48px), #000 100%);
+          mask-image: linear-gradient(to bottom, #000 0, #000 48px, transparent 84px, transparent calc(100% - 84px), #000 calc(100% - 48px), #000 100%); }
 .hero .eyebrow { margin-bottom: 28px; }
 /* «нейроисследования:» — одно слово шириной ~10,9 em, кегль следует за шириной колонки */
 .hero h1 { margin-bottom: 28px; font-size: clamp(28px, calc(4.4vw - 6px), 52px); }
@@ -20,17 +27,19 @@
 .hero-cta { display: flex; align-items: center; gap: 32px; }
 
 .tasks { display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid var(--line); }
-.task { display: grid; grid-template-columns: 64px 1fr; gap: 20px; align-items: baseline; padding: 28px 24px 28px 0; border-bottom: 1px solid var(--line); }
+.task { display: grid; grid-template-columns: 64px 1fr; gap: 20px; align-items: start; padding: 28px 24px 28px 0; border-bottom: 1px solid var(--line); }
 .task:nth-child(odd) { border-right: 1px solid var(--line); }
 .task:nth-child(even) { padding-left: 32px; }
-.task .n { font-size: 14px; font-weight: 700; color: var(--accent); }
+/* номера задач и этапов цикла — кольцо с градиентом, цифра #006CB4 на белом (белый на #3091D1 не проходит AA) */
+.task .n, .cyc b { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; border: 3px solid transparent;
+  background: linear-gradient(#fff, #fff) padding-box, var(--g-brand) border-box; color: var(--accent); font: 700 15px/1 var(--font-display); letter-spacing: 0; }
 .task h3 { font-size: 20px; line-height: 1.35; font-weight: 700; margin-bottom: 6px; }
 .task p { font-size: 16px; color: var(--muted); }
 
-.dirs { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--line); background: #fff; }
+.dirs { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--line); background: #fff; border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--sh-md); }
 .dir { display: flex; flex-direction: column; border-right: 1px solid var(--line); }
 .dir:last-child { border-right: 0; }
-.dir .photo-ph { aspect-ratio: 4/3; border-bottom: 1px solid var(--line); }
+.dir .photo-ph { aspect-ratio: 4/3; border-bottom: 1px solid var(--line); border-radius: 0; }
 .dir-body { padding: 32px; display: flex; flex-direction: column; flex: 1; }
 .dir h3 { font-size: 26px; line-height: 1.2; margin-bottom: 14px; }
 .dir p { font-size: 16px; color: var(--muted); margin-bottom: 28px; }
@@ -39,13 +48,13 @@
 .dir:hover .dir-more { background: var(--band); }
 .dir:focus-visible { outline: 3px solid var(--mark); outline-offset: -3px; }
 
-.cyc { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 2px solid var(--text); }
+.cyc { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 4px solid transparent; border-image: var(--g-brand) 1; }
 .cyc > div { padding: 28px 28px 0 0; position: relative; }
 .cyc > div + div { padding-left: 28px; border-left: 1px solid var(--line); }
-.cyc b { display: block; font-size: 14px; font-weight: 700; color: var(--mark); letter-spacing: .1em; margin-bottom: 16px; }
+.cyc b { margin-bottom: 16px; }
 .cyc h3 { font-size: 22px; margin-bottom: 12px; }
 .cyc p { font-size: 16px; color: var(--muted); }
-.cyc .arrow { position: absolute; top: -13px; right: -12px; width: 24px; height: 24px; background: #fff; border: 2px solid var(--text); border-radius: 50%; display: grid; place-items: center; font-size: 12px; font-weight: 700; z-index: 1; }
+.cyc .arrow { position: absolute; top: -14px; right: -12px; width: 24px; height: 24px; background: #fff; border: 2px solid var(--mark); color: var(--accent); border-radius: 50%; display: grid; place-items: center; font-size: 12px; font-weight: 700; z-index: 1; }
 .hist { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
 .hist-intro h2 { margin-bottom: 20px; }
 .hist-intro p { font-size: 18px; color: var(--muted); }
@@ -54,24 +63,25 @@
 .labs { margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--line); }
 .labs h3 { font-size: 20px; line-height: 1.3; margin-bottom: 14px; }
 .labs ul { list-style: none; display: grid; grid-template-columns: 1fr; gap: 8px; font-size: 16px; }
-.labs li { padding-left: 18px; position: relative; }
-.labs li::before { content: ""; position: absolute; left: 0; top: .7em; width: 8px; height: 2px; background: var(--mark); }
+.labs li { padding-left: 32px; position: relative; }
+.labs li::before { content: "✓"; position: absolute; left: 0; top: 2px; width: 22px; height: 22px; border-radius: 50%; background: var(--band); color: var(--accent); font-size: 13px; font-weight: 700; display: grid; place-items: center; }
 .gzd h3 { font-size: 20px; line-height: 1.3; margin-bottom: 24px; }
 .tl { list-style: none; }
 .tl li { position: relative; display: grid; grid-template-columns: 56px 1fr; gap: 0 20px; padding: 0 0 26px 36px; font-size: 16px; line-height: 1.5; }
-.tl li::before { content: ""; position: absolute; left: 0; top: 4px; width: 16px; height: 16px; border: 2px solid var(--accent); border-radius: 50%; background: var(--bg); box-sizing: border-box; }
-.tl li::after { content: ""; position: absolute; left: 7px; top: 22px; bottom: 2px; width: 2px; background: var(--line); }
+.tl li::before { content: ""; position: absolute; left: 0; top: 4px; width: 16px; height: 16px; border: 2px solid var(--mark); border-radius: 50%; background: var(--bg); box-sizing: border-box; }
+.tl li::after { content: ""; position: absolute; left: 7px; top: 22px; bottom: 2px; width: 2px; background: var(--mark); }
 .tl li:last-child { padding-bottom: 0; }
 .tl li:last-child::after { display: none; }
-.tl li.now::before { background: var(--accent); }
+.tl li.now::before { background: var(--mark); }
 .tl-y { font-family: "Montserrat", sans-serif; font-weight: 700; font-size: 18px; line-height: 1.35; color: var(--accent); }
 .tl .more-l { display: inline-block; margin-top: 8px; font-size: 15px; font-weight: 700; color: var(--accent); border-bottom: 1.5px solid var(--mark); padding-bottom: 1px; }
 .gzd .hist-src { font-size: 13px; margin-top: 20px; }
 
 .flag { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
 .staff5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 24px; }
-.staff { display: flex; flex-direction: column; background: #fff; border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; }
-.staff .photo-ph { aspect-ratio: 4/5; border-bottom: 1px solid var(--line); }
+.staff { display: flex; flex-direction: column; background: #fff; border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--sh-md); transition: box-shadow .2s, border-color .2s; }
+.staff:hover { box-shadow: var(--sh-lg); border-color: var(--mark); }
+.staff .photo-ph { aspect-ratio: 4/5; border-bottom: 1px solid var(--line); border-radius: 0; }
 .staff-b { padding: 20px; display: flex; flex-direction: column; flex: 1; }
 .staff h3 { font-size: 18px; line-height: 1.3; margin-bottom: 8px; }
 .staff .pos { font-size: 15px; line-height: 1.45; color: var(--muted); }
@@ -79,7 +89,12 @@
 @media (min-width: 768px) and (max-width: 1199px) { .staff5 { grid-template-columns: repeat(3, 1fr); } }
 .sec-foot { display: flex; justify-content: flex-end; margin-top: 40px; }
 
-.nums { display: grid; grid-template-columns: repeat(7, 1fr); row-gap: 28px; align-items: start; border-top: 2px solid var(--text); padding-top: 32px; }
+/* цифры и подпись — на сплошной белой панели; паттерн 08 «Калибровка» («методика, лаборатория») виден только вокруг */
+section.block:has(> .wrap > .nums) { position: relative; isolation: isolate; overflow: hidden; }
+section.block:has(> .wrap > .nums)::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: url("patterns/08_kalibrovka_B.svg") 0 0/var(--pat-size) repeat; opacity: var(--pat-opacity-band); }
+.nums { display: grid; grid-template-columns: repeat(7, 1fr); row-gap: 28px; align-items: start; border-top: 4px solid transparent; border-image: var(--g-brand) 1;
+  background: #fff; padding: 32px 32px 28px; border-radius: 0 0 var(--r-lg) var(--r-lg); box-shadow: var(--sh-md); }
 .nums .lbl { grid-column: 1 / -1; font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
 .nums .num { padding: 0 16px; }
 .nums .num + .num { border-left: 1px solid var(--line); }
@@ -88,7 +103,7 @@
 .nums .num small { display: block; font-size: 15px; line-height: 1.4; color: var(--muted); }
 .news { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
 
-.channels { display: grid; grid-template-columns: repeat(6, 1fr); border: 1px solid var(--line); background: #fff; }
+.channels { display: grid; grid-template-columns: repeat(6, 1fr); border: 1px solid var(--line); background: #fff; border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--sh-md); }
 .chcell { padding: 28px 24px; border-right: 1px solid var(--line); display: flex; flex-direction: column; gap: 14px; }
 .chcell:last-child { border-right: 0; }
 .chcell b { font-size: 17px; }
@@ -98,22 +113,29 @@
 .cform .contacts { margin-top: 40px; display: grid; gap: 20px; border-top: 1px solid var(--line); padding-top: 28px; }
 .cform .contacts div { display: grid; grid-template-columns: 110px 1fr; gap: 16px; font-size: 16px; }
 .cform .contacts small { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); padding-top: 3px; }
-.fbox { background: #fff; border: 1px solid var(--line); border-radius: var(--r); padding: 40px; display: grid; gap: 22px; }
+.fbox { background: #fff; border: 1px solid var(--line); border-radius: var(--r-lg); box-shadow: var(--sh-md); padding: 40px; display: grid; gap: 22px; }
+/* свободная зона: паттерн 06 «Изолинии» только в правой половине, под сплошной формой */
+#obsudit-nir { position: relative; isolation: isolate; overflow: hidden; }
+#obsudit-nir::before { content: ""; position: absolute; top: 0; bottom: 0; left: 50%; right: 0; z-index: -1; pointer-events: none;
+  background: url("patterns/06_izolinii_B.svg") 0 0/var(--pat-size) repeat; opacity: var(--pat-opacity-zone); }
 .fbox .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 .fbox .actions { display: flex; align-items: center; gap: 24px; }
 
 @media (max-width: 767px) {
   .hero-img { position: relative; inset: auto; }
-  .hero-img .photo-ph { aspect-ratio: 4/3; height: auto; font-size: 13px; }
+  .hero-img .photo-ph::after { content: "Фото: реальная лабораторная съёмка, без фильтров"; }
+  .hero-panel::after { -webkit-mask-image: linear-gradient(to bottom, transparent calc(100% - 44px), #000 calc(100% - 24px)); mask-image: linear-gradient(to bottom, transparent calc(100% - 44px), #000 calc(100% - 24px)); }
+  .hero-img .photo-ph { aspect-ratio: 4/3; height: auto; font-size: 13px; border-radius: var(--photo-radius); }
   .hero-in { min-height: 0; }
   .hero-panel { width: 100%; padding: 32px 0 48px; }
   .hero .eyebrow { margin-bottom: 18px; }
-  .hero h1 { margin-bottom: 18px; font-size: clamp(24px, 7.4vw, 30px); }
+  .hero h1 { margin-bottom: 18px; font-size: clamp(22px, 7.1vw, 30px); }
   .lead { font-size: 17px; margin-bottom: 28px; }
   .hero-cta { flex-direction: column; align-items: stretch; gap: 18px; }
   .hero-cta .link { align-self: flex-start; }
   .tasks { grid-template-columns: 1fr; }
   .task, .task:nth-child(even) { grid-template-columns: 36px 1fr; padding: 20px 0; border-right: 0; }
+  .task .n, .cyc b { width: 36px; height: 36px; font-size: 13px; }
   .task h3 { font-size: 17px; }
   .task p { font-size: 15px; }
   .dirs { grid-template-columns: 1fr; border: 0; background: transparent; gap: 20px; }
@@ -121,7 +143,7 @@
   .dir:last-child { border-right: 1px solid var(--line); }
   .dir-body { padding: 22px; }
   .dir h3 { font-size: 22px; }
-  .cyc { grid-template-columns: 1fr; border-top: 0; border-left: 2px solid var(--text); }
+  .cyc { grid-template-columns: 1fr; border-top: 0; border-image: none; border-left: 4px solid var(--mark); }
   .cyc > div, .cyc > div + div { padding: 0 0 28px 24px; border-left: 0; }
   .cyc .arrow { display: none; }
   .cyc b { margin-bottom: 6px; }
@@ -143,7 +165,7 @@
   .staff .pos { font-size: 14px; }
   .staff .proj { font-size: 13px; margin-top: 10px; padding-top: 10px; }
   .sec-foot { justify-content: flex-start; margin-top: 28px; }
-  .nums { grid-template-columns: 1fr 1fr; row-gap: 24px; padding-top: 24px; }
+  .nums { grid-template-columns: 1fr 1fr; row-gap: 24px; padding: 24px 20px 20px; }
   .nums .num, .nums .num:nth-child(2) { padding: 0 12px; }
   .nums .num:nth-child(even) { padding-left: 0; border-left: 0; }
   .nums .num b { font-size: 34px; }
@@ -157,14 +179,37 @@
   .cform .contacts { margin-top: 24px; }
   .cform .contacts div { grid-template-columns: 1fr; gap: 2px; }
   .fbox { padding: 20px; gap: 18px; }
+  #obsudit-nir::before { left: 0; top: auto; height: 160px; }
   .fbox .row2 { grid-template-columns: 1fr; }
   .fbox .actions { flex-direction: column; align-items: stretch; }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .task { grid-template-columns: 48px 1fr; gap: 16px; padding-right: 16px; }
+  .task:nth-child(even) { padding-left: 20px; }
+  .task h3 { font-size: 18px; }
+  .dirs { grid-template-columns: 1fr; }
+  .dir { display: grid; grid-template-columns: 2fr 3fr; border-right: 0; border-bottom: 1px solid var(--line); }
+  .dir:last-child { border-bottom: 0; }
+  .dir .photo-ph { aspect-ratio: auto; height: 100%; min-height: 220px; border-bottom: 0; border-right: 1px solid var(--line); }
+  .dir-body { padding: 28px; }
+  .dir h3 { font-size: 24px; }
+  .cyc { grid-template-columns: repeat(2, 1fr); row-gap: 32px; }
+  .cyc > div:nth-child(odd) { padding-left: 0; border-left: 0; }
+  .cyc > div:nth-child(n+3) { border-top: 1px solid var(--line); }
+  .cyc > div:nth-child(2n) .arrow { display: none; }
+  .nums { grid-template-columns: repeat(4, 1fr); }
+  .nums .num:nth-child(6) { padding-left: 0; border-left: 0; }
+  .nums .num b { font-size: 40px; }
+  .channels { grid-template-columns: repeat(3, 1fr); }
+  .chcell:nth-child(3n) { border-right: 0; }
+  .chcell:nth-child(-n+3) { border-bottom: 1px solid var(--line); }
 }
 </style>
 </head>
 <body>
 <a class="skip" href="#main">Перейти к содержанию</a>
-<div class="mock">МАКЕТ · шаг 2 · направление Б · пунктирная рамка — плейсхолдер текста, не публиковать · фото — серые заглушки с описанием кадра</div>
+<div class="mock">МАКЕТ · шаг 2 · вариант А (Б + стиль v2) · пунктирная рамка — плейсхолдер текста, не публиковать · фото — серые заглушки с описанием кадра</div>
 
 <header>
   <div class="wrap hd">

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Все проекты — макет сайта, вариант Б</title>
+<title>Все проекты — макет сайта, вариант А</title>
 <link rel="stylesheet" href="b.css">
 <style>
 .crumbs { font-size: 14px; color: var(--muted); padding: 24px 0 0; }
@@ -34,7 +34,7 @@
 .empty h2 { font-size: 26px; }
 .empty p { color: var(--muted); font-size: 16px; max-width: 34em; }
 
-.cta-band { background: var(--text); color: #fff; padding: 64px 0; }
+.cta-band { background: var(--pb-blue-dark); color: #fff; padding: 64px 0; }
 .cta-band .in { display: flex; justify-content: space-between; align-items: center; gap: 48px; }
 .cta-band h2 { color: #fff; font-size: 34px; }
 .cta-band p { color: var(--foot-text); margin-top: 12px; font-size: 17px; }
@@ -44,7 +44,7 @@
 .spec h2 { font-size: 28px; margin-bottom: 8px; }
 .spec > .wrap > p { color: var(--muted); font-size: 16px; margin-bottom: 32px; max-width: 46em; }
 .spec-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-.spec-card { border: 1px solid var(--line); border-radius: var(--r); padding: 24px; background: #fff; }
+.spec-card { border: 1px solid var(--line); border-radius: var(--r-lg); padding: 24px; background: #fff; }
 .spec-card h3 { font-size: 18px; margin-bottom: 12px; }
 .spec-card ul { list-style: none; display: grid; gap: 8px; font-size: 14px; }
 .spec-card li { padding-left: 16px; position: relative; }
@@ -69,6 +69,7 @@
   .spec { padding: 36px 0 48px; }
   .spec-grid { grid-template-columns: 1fr; }
 }
+@media (min-width: 768px) and (max-width: 1023px) { .spec-grid { grid-template-columns: repeat(2, 1fr); } }
 </style>
 </head>
 <body>
