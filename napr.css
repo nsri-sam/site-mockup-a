@@ -22,7 +22,11 @@
 .ptasks h3 { font-size: 19px; line-height: 1.35; font-weight: 700; }
 .ptasks p { font-size: 15px; color: var(--muted); margin-top: 4px; }
 
-.svc { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.svc { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; position: relative; isolation: isolate; }
+/* работы и услуги: паттерн 08 «Калибровка» («методика, лаборатория») — на всю ширину окна вокруг сплошных карточек, до низа блока; под заголовком не виден */
+.svc::before { content: ""; position: absolute; z-index: -1; pointer-events: none; left: calc(50% - 50cqw); right: calc(50% - 50cqw); top: -40px; bottom: -96px;
+  background: url("patterns/08_kalibrovka_B.svg") 0 0/var(--pat-size) repeat; opacity: var(--pat-opacity-band);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 72px); mask-image: linear-gradient(to bottom, transparent 0, #000 72px); }
 .svc article { background: #fff; border: 1px solid var(--line); border-radius: var(--r-lg); box-shadow: var(--sh-md); padding: 32px; display: flex; flex-direction: column; gap: 14px; }
 .svc h3 { font-size: 23px; }
 .svc p { font-size: 16px; color: var(--muted); }
@@ -110,6 +114,7 @@
   .ptasks > div, .ptasks > div:nth-child(even) { grid-template-columns: 36px 1fr; padding: 18px 0; border-right: 0; }
   .ptasks h3 { font-size: 17px; }
   .svc { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .svc::before { top: -24px; bottom: -56px; }
   .svc article { padding: 22px; }
   .svc h3 { font-size: 20px; }
   .svc dl { grid-template-columns: 1fr; gap: 2px; }
