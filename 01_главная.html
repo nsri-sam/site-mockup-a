@@ -89,10 +89,10 @@
 @media (min-width: 768px) and (max-width: 1199px) { .staff5 { grid-template-columns: repeat(3, 1fr); } }
 .sec-foot { display: flex; justify-content: flex-end; margin-top: 40px; }
 
-/* цифры и подпись — на сплошной белой панели; паттерн 08 «Калибровка» («методика, лаборатория») виден только вокруг */
+/* цифры и подпись — на сплошной белой панели; паттерн 06 «Изолинии» (спокойный, без ритма сетки) виден только вокруг */
 section.block:has(> .wrap > .nums) { position: relative; isolation: isolate; overflow: hidden; }
 section.block:has(> .wrap > .nums)::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
-  background: url("patterns/08_kalibrovka_B.svg") 0 0/var(--pat-size) repeat; opacity: var(--pat-opacity-band); }
+  background: url("patterns/06_izolinii_B.svg") 0 0/var(--pat-size) repeat; opacity: var(--pat-opacity-zone); }
 .nums { display: grid; grid-template-columns: repeat(7, 1fr); row-gap: 28px; align-items: start; border-top: 4px solid transparent; border-image: var(--g-brand) 1;
   background: #fff; padding: 32px 32px 28px; border-radius: 0 0 var(--r-lg) var(--r-lg); box-shadow: var(--sh-md); }
 .nums .lbl { grid-column: 1 / -1; font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
