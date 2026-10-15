@@ -103,11 +103,6 @@ section.block:has(> .wrap > .nums)::before { content: ""; position: absolute; in
 .nums .num small { display: block; font-size: 15px; line-height: 1.4; color: var(--muted); }
 .news { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
 
-.channels { display: grid; grid-template-columns: repeat(6, 1fr); border: 1px solid var(--line); background: #fff; border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--sh-md); }
-.chcell { padding: 28px 24px; border-right: 1px solid var(--line); display: flex; flex-direction: column; gap: 14px; }
-.chcell:last-child { border-right: 0; }
-.chcell b { font-size: 17px; }
-.chcell span { font-size: 14px; color: var(--muted); line-height: 1.45; }
 
 .cform { display: grid; grid-template-columns: 1fr 1.2fr; gap: 80px; }
 .cform .contacts { margin-top: 40px; display: grid; gap: 20px; border-top: 1px solid var(--line); padding-top: 28px; }
@@ -171,10 +166,6 @@ section.block:has(> .wrap > .nums)::before { content: ""; position: absolute; in
   .nums .num b { font-size: 34px; }
   .nums .num small { font-size: 13px; }
   .news { grid-template-columns: 1fr; gap: 28px; }
-  .channels { grid-template-columns: 1fr 1fr; }
-  .chcell { padding: 20px 16px; border-bottom: 1px solid var(--line); }
-  .chcell:nth-child(2n) { border-right: 0; }
-  .chcell span { font-size: 13px; }
   .cform { grid-template-columns: 1fr; gap: 32px; }
   .cform .contacts { margin-top: 24px; }
   .cform .contacts div { grid-template-columns: 1fr; gap: 2px; }
@@ -201,9 +192,6 @@ section.block:has(> .wrap > .nums)::before { content: ""; position: absolute; in
   .nums { grid-template-columns: repeat(4, 1fr); }
   .nums .num:nth-child(6) { padding-left: 0; border-left: 0; }
   .nums .num b { font-size: 40px; }
-  .channels { grid-template-columns: repeat(3, 1fr); }
-  .chcell:nth-child(3n) { border-right: 0; }
-  .chcell:nth-child(-n+3) { border-bottom: 1px solid var(--line); }
 }
 </style>
 </head>
@@ -384,21 +372,7 @@ section.block:has(> .wrap > .nums)::before { content: ""; position: absolute; in
     </div>
   </section>
 
-  <section class="block">
-    <div class="wrap">
-      <div class="sec-head"><div><div class="sec-num">Каналы</div><h2>Мы в каналах</h2></div><p class="sub ph">Короткие новости, видео с исследований и подкасты.</p></div>
-      <div class="channels">
-        <a class="chcell" href="#"><span class="chi lg">TG</span><b>Telegram</b><span class="ph">Адрес канала — уточнить</span></a>
-        <a class="chcell" href="#"><span class="chi lg">MAX</span><b>MAX</b><span class="ph">Адрес канала — уточнить</span></a>
-        <a class="chcell" href="https://vk.com/nsri_samsmu" target="_blank" rel="noopener"><span class="chi lg">VK</span><b>VK</b><span>vk.com/nsri_samsmu</span></a>
-        <a class="chcell" href="#"><span class="chi lg">Дз</span><b>Дзен</b><span class="ph">Адрес канала — уточнить</span></a>
-        <a class="chcell" href="#"><span class="chi lg">ЯП</span><b>Яндекс Подкасты</b><span class="ph">Адрес — уточнить</span></a>
-        <a class="chcell" href="#"><span class="chi lg">RT</span><b>Rutube</b><span class="ph">Адрес канала — уточнить</span></a>
-      </div>
-    </div>
-  </section>
-
-  <section class="block band" id="obsudit-nir" aria-labelledby="obsudit-nir-h">
+  <section class="block" id="obsudit-nir" aria-labelledby="obsudit-nir-h">
     <div class="wrap cform">
       <div>
         <div class="sec-num">Заявка</div>
