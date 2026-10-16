@@ -340,10 +340,10 @@ nav .nav-sub a:hover, nav .nav-sub a.on { color: var(--accent); background: var(
 .tasks-cta p span { display: block; font-size: 15px; font-weight: 400; color: var(--muted); margin-top: 4px; }
 .band .tasks-cta { background: #fff; border: 1px solid var(--line); border-left: 6px solid var(--accent); }
 
-/* Первый экран направлений и проектов: паттерн 07 «Схема» заполняет весь блок на всю ширину окна (плитка 600 px, repeat).
-   У компактных шапок списков (.lhead) паттерна нет: сразу под ними фильтры или фото */
-.dhero, .phead { position: relative; isolation: isolate; }
-.dhero::after, .phead::after { content: ""; position: absolute; z-index: -1; inset: 0; left: calc(50% - 50cqw); right: calc(50% - 50cqw); pointer-events: none;
+/* Первый экран направлений: паттерн 07 «Схема» на всю ширину окна (плитка 600 px, repeat).
+   Шапка описания проекта (.phead) — без паттерна. У списков (.lhead) паттерна тоже нет. */
+.dhero { position: relative; isolation: isolate; }
+.dhero::after { content: ""; position: absolute; z-index: -1; inset: 0; left: calc(50% - 50cqw); right: calc(50% - 50cqw); pointer-events: none;
   background: url("patterns/07_shema_B.svg") 0 0/var(--pat-size) repeat; opacity: var(--pat-opacity-hero); }
 
 /* Тёмный блок-призыв (#004E82): паттерн 06 «Изолинии» палитры В заполняет весь блок */
