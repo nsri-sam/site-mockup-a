@@ -38,7 +38,7 @@
 .task:hover .n, .task.is-hover .n { background: linear-gradient(var(--accent), var(--accent)) padding-box, #fff border-box; color: #fff; }
 
 /* отдельные карточки с зазором — чтобы scale при наведении не обрезался общей рамкой */
-.dirs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.dirs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; padding: 4px; margin: -4px; }
 .dir { display: flex; flex-direction: column; background: #fff; border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--sh-md); }
 .dir .photo-ph { aspect-ratio: 4/3; border-bottom: 1px solid var(--line); border-radius: 0; }
 .dir-body { padding: 32px; display: flex; flex-direction: column; flex: 1; }
@@ -80,8 +80,8 @@
 .tl .more-l:hover { color: var(--accent-hover); }
 .gzd .hist-src { font-size: 13px; margin-top: 20px; }
 
-.flag { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-.staff5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 24px; }
+.flag { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; padding: 8px; margin: -8px; }
+.staff5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 24px; padding: 8px; margin: -8px; }
 .staff { display: flex; flex-direction: column; background: #fff; border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--sh-md); }
 .staff:hover { border-color: var(--mark); }
 .staff .photo-ph { aspect-ratio: 4/5; border-bottom: 1px solid var(--line); border-radius: 0; }
@@ -104,7 +104,7 @@ section.block:has(> .wrap > .nums)::before { content: ""; position: absolute; in
 .nums .num:nth-child(2) { padding-left: 0; }
 .nums .num b { display: block; font-size: 48px; font-weight: 700; color: var(--accent); line-height: 1; margin-bottom: 10px; letter-spacing: -.02em; white-space: nowrap; }
 .nums .num small { display: block; font-size: 15px; line-height: 1.4; color: var(--muted); }
-.news { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+.news { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; padding: 8px; margin: -8px; }
 
 
 .cform { display: grid; grid-template-columns: 1fr 1.2fr; gap: 80px; }
