@@ -159,21 +159,24 @@ h3 { font-size: 24px; line-height: 1.25; font-weight: 700; letter-spacing: -.01e
 .more-b::after { content: "→"; }
 .pcard .nc-lead { font-size: 15px; }
 
-/* Карточка новости */
-.ncard { display: flex; flex-direction: column; gap: 14px; }
-.ncard .photo-ph { border-radius: var(--photo-radius); }
+/* Карточка новости — как у проекта: рамка, тень, обложка + тело; краткая суть на обложке при наведении */
+.ncard { display: flex; flex-direction: column; background: #fff; border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--sh-md); transition: border-color .2s, box-shadow .2s; }
+.ncard:hover, .ncard.is-hover { border-color: var(--mark); box-shadow: var(--sh-lg); }
+.ncard .photo-ph { border-bottom: 1px solid var(--line); border-radius: 0; }
+.ncard-b { padding: 20px 24px 24px; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; flex: 1; width: 100%; box-sizing: border-box; }
+.ncard-b .nmeta, .ncard-b .tags { width: 100%; }
+.ncard-b .tags { margin-top: auto; display: flex; gap: 6px; flex-wrap: wrap; }
 .ncard time { font-size: 13px; font-weight: 700; color: var(--muted); letter-spacing: .04em; }
-.ncard h3 { font-size: 19px; line-height: 1.35; }
+.ncard h3 { font-size: 20px; line-height: 1.3; }
 .ncard:hover h3, .ncard.is-hover h3 { color: var(--accent); }
-/* Краткая суть: поверх обложки при наведении и фокусе; на тач-экранах — текстом под заголовком */
-.nc-media { position: relative; border-radius: var(--photo-radius); overflow: hidden; }
+.nc-media { position: relative; overflow: hidden; }
+.ncard .nc-sum { border-radius: 0; }
 .nc-sum { position: absolute; inset: 0; background: rgba(0,0,0,.97); color: #fff; padding: 20px 22px; display: flex; flex-direction: column; justify-content: space-between; gap: 12px; opacity: 0; transform: translateY(8px); transition: opacity .2s, transform .2s; }
 .nc-sum p { font-size: 15px; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; overflow: hidden; }
-.nc-sum .more-l { font-size: 14px; font-weight: 700; color: #fff; align-self: flex-start; border-bottom: 1.5px solid currentColor; padding-bottom: 2px; transition: color .2s; }
-.nc-sum .more-l:hover { color: var(--mark); }
 .ncard:hover .nc-sum, .ncard:focus-visible .nc-sum, .ncard.is-hover .nc-sum { opacity: 1; transform: none; }
-.ncard:focus-visible { outline: 3px solid var(--mark); outline-offset: 4px; border-radius: var(--r); }
+.ncard:focus-visible { outline: 3px solid var(--mark); outline-offset: 4px; }
 .nc-lead { display: none; font-size: 15px; line-height: 1.5; color: var(--muted); }
+.ncard .nc-lead { font-size: 15px; }
 @media (prefers-reduced-motion: reduce) { .nc-sum { transition: none; transform: none; } }
 @media (hover: none) {
   .nc-sum { display: none; }
@@ -304,8 +307,8 @@ nav .nav-sub a:hover, nav .nav-sub a.on { color: var(--accent); background: var(
 }
 
 /* строка «что решает» на карточке проекта видна всегда */
-.pcard .nc-lead { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-@media (hover: none) { .pcard .nc-lead { -webkit-line-clamp: 3; } }
+.pcard .nc-lead, .ncard .nc-lead { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+@media (hover: none) { .pcard .nc-lead, .ncard .nc-lead { -webkit-line-clamp: 3; } }
 
 /* следующий шаг после блока задач */
 .tasks-cta { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-top: 32px; padding: 20px 24px; background: var(--band); border-left: 6px solid var(--accent); border-radius: 0 var(--r-md) var(--r-md) 0; }
