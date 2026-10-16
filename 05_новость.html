@@ -30,13 +30,14 @@
 .safe { position: relative; }
 .photo-ph.safe::after { content: "безопасная зона 4:3 — кадр карточки"; position: absolute; top: 0; bottom: 0; left: 12.5%; right: 12.5%; max-width: none; background: none; border-radius: 0; border-left: 1.5px dashed var(--mark); border-right: 1.5px dashed var(--mark); font: 700 11px/1.3 var(--font-display); color: var(--accent); display: flex; align-items: flex-start; justify-content: center; padding: 10px 0 0; pointer-events: none; }
 
-/* Полоса «поделиться» под шапкой */
-.share-top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 0; margin-top: 32px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.share { display: flex; align-items: center; gap: 8px; }
+/* «Поделиться» — один ряд внизу статьи */
+.share { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
 .share > span { font-size: 14px; font-weight: 700; color: var(--muted); margin-right: 4px; }
 .sh { display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 14px; border: 1px solid var(--line); border-radius: var(--r); font-size: 14px; font-weight: 700; color: var(--text); background: #fff; text-decoration: none; }
 .sh:hover, .sh.is-hover { border-color: var(--accent); color: var(--accent); }
 .sh.copy { color: var(--muted); }
+/* После обложки — тонкий разделитель перед текстом (без второго «Поделиться») */
+.n-cover + .n-body { border-top: 1px solid var(--line); margin-top: 32px; padding-top: 48px; }
 
 /* Текст статьи */
 .n-body { padding: 48px 0 0; }
@@ -65,11 +66,12 @@
 .rel .rt { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; margin-bottom: 6px; }
 .rel h3 { font-size: 18px; line-height: 1.3; }
 
-.chan { border: 1px solid var(--line); border-radius: var(--r-lg); background: var(--band); padding: 28px; }
-.chan h2 { font-size: 24px; margin-bottom: 6px; }
-.chan > p { font-size: 16px; color: var(--muted); margin-bottom: 20px; }
-.chan-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-.cl { display: flex; align-items: center; gap: 12px; background: #fff; border: 1px solid var(--line); border-radius: var(--r); padding: 12px 14px; }
+.chan { border: 1px solid var(--line); border-radius: var(--r-lg); background: var(--band); padding: 24px 28px; }
+.chan h2 { font-size: 22px; margin-bottom: 6px; }
+.chan > p { font-size: 15px; color: var(--muted); margin-bottom: 16px; max-width: 42em; }
+/* Компактный список: только заполненные каналы, без пустых ячеек сетки */
+.chan-list { display: flex; flex-direction: column; gap: 8px; }
+.cl { display: flex; align-items: center; gap: 12px; background: #fff; border: 1px solid var(--line); border-radius: var(--r); padding: 10px 14px; text-decoration: none; color: inherit; }
 .cl:hover, .cl.is-hover { border-color: var(--accent); }
 .cl b { display: block; font-size: 15px; }
 .cl small { display: block; font-size: 13px; color: var(--muted); line-height: 1.35; }
@@ -110,10 +112,9 @@
   .n-cover { margin: 28px -20px 0; }
   .n-cover .photo-ph { border-radius: 0; }
   .n-cover figcaption { padding: 0 20px; font-size: 13px; }
-  .share-top { flex-direction: column; align-items: flex-start; gap: 12px; margin-top: 24px; padding: 16px 0; }
-  .share { flex-wrap: wrap; }
   .share > span { width: 100%; margin-bottom: 2px; }
   .sh { height: 44px; }
+  .n-cover + .n-body { margin-top: 24px; padding-top: 32px; }
   .n-body { padding-top: 32px; }
   .n-body p, .n-body li { font-size: 17px; }
   .n-body h2 { font-size: 24px; margin-top: 36px; }
@@ -124,10 +125,9 @@
   .rel a { grid-template-columns: 88px minmax(0, 1fr); gap: 14px; }
   .rel .tag { white-space: normal; }
   .rel h3 { font-size: 16px; }
-  .chan { padding: 20px; }
-  .chan h2 { font-size: 21px; }
-  .chan-list { grid-template-columns: 1fr; }
-  .cl { padding: 12px; min-height: 56px; }
+  .chan { padding: 18px 20px; }
+  .chan h2 { font-size: 20px; }
+  .cl { padding: 12px; min-height: 52px; }
   .share-end { flex-direction: column; align-items: flex-start; }
   .more { grid-template-columns: 1fr; gap: 28px; }
   .spec { margin-top: 56px; padding: 36px 0 48px; }
@@ -178,16 +178,6 @@
           <div class="photo-ph safe"><span>Обложка новости · 16:9 · загрузка 1920×1080 px, JPG/WebP до 400 КБ<br>реальное фото события или исследования · генеративные изображения запрещены</span></div>
           <figcaption class="ph">Подпись к обложке и автор фото — необязательное поле</figcaption>
         </figure>
-
-        <div class="share-top">
-          <div class="share" aria-label="Поделиться">
-            <span>Поделиться</span>
-            <a class="sh sh-tg" href="#"><i class="shi" aria-hidden="true"></i>Telegram</a>
-            <a class="sh sh-vk" href="#"><i class="shi" aria-hidden="true"></i>VK</a>
-            <a class="sh sh-max" href="#"><i class="shi" aria-hidden="true"></i>MAX</a>
-            <a class="sh copy" href="#">Скопировать ссылку</a>
-          </div>
-        </div>
 
         <div class="n-body">
           <p class="ph">Первый абзац раскрывает аннотацию: что произошло, где и когда, кто участвовал. Длина строки ограничена колонкой 760 px — около 70 знаков, удобных для чтения. Плейсхолдер, не публиковать</p>
@@ -246,6 +236,7 @@
               <a class="sh sh-tg" href="#"><i class="shi" aria-hidden="true"></i>Telegram</a>
               <a class="sh sh-vk" href="#"><i class="shi" aria-hidden="true"></i>VK</a>
               <a class="sh sh-max" href="#"><i class="shi" aria-hidden="true"></i>MAX</a>
+              <a class="sh copy" href="#">Скопировать ссылку</a>
             </div>
             <a class="link back" href="10_новости.html">← Все новости</a>
           </div>
@@ -280,7 +271,7 @@
             <tr><td>Безопасная зона</td><td>центральные 75 % ширины (4:3): лица и главный объект — здесь, чтобы не обрезались в превью соцсетей</td></tr>
             <tr><td>Десктоп</td><td>на ширину сетки 1200 px</td></tr>
             <tr><td>Мобильный</td><td>на всю ширину экрана, без скругления</td></tr>
-            <tr><td>Нет обложки</td><td>блок скрыт, под шапкой сразу «Поделиться»</td></tr>
+            <tr><td>Нет обложки</td><td>блок скрыт, под шапкой сразу текст; «Поделиться» — только внизу</td></tr>
             <tr><td>Превью ссылки (og:image)</td><td>та же обложка, кадрирование 1200×630 по центру</td></tr>
           </table>
         </div>
@@ -312,10 +303,10 @@
         <div class="spec-card">
           <h3>Соцсети и каналы</h3>
           <ul>
-            <li>«Поделиться» — Telegram, VK, MAX + «Скопировать ссылку». Только ссылки, без сторонних скриптов (НОВ-3)</li>
-            <li>«Обсудить в канале» — ссылки на посты именно этой новости. Редактор вставляет адрес поста в поле канала</li>
-            <li>Канал без поста — карточка не выводится. Нет ни одного поста — блок скрыт, каналы НИИ остаются в шапке и футере</li>
-            <li>Набор каналов — КАН-1: Telegram, MAX, VK, Дзен. Иконки — временные монограммы до знаков из брендбуков платформ</li>
+            <li>«Поделиться» — один ряд внизу статьи: Telegram, VK, MAX + «Скопировать ссылку». Только ссылки, без сторонних скриптов (НОВ-3). Верхнего ряда нет</li>
+            <li>«Обсудить в канале» — компактный список ссылок на посты именно этой новости. Редактор вставляет адрес поста в поле канала</li>
+            <li>Канал без поста — строка не выводится (без пустых ячеек). Нет ни одного поста — блок скрыт, каналы НИИ остаются в футере</li>
+            <li>Набор каналов — КАН-1: Telegram, MAX, VK, Дзен. Значки — брендовые PNG в img/soc/</li>
             <li>Ссылки в каналы — с UTM по правилам SMM (С-4)</li>
           </ul>
         </div>
@@ -327,7 +318,7 @@
           <div class="mini">
             <span class="tag dir">Рубрика</span>
             <h4>Заголовок новости на максимум — девяносто знаков, переносится на три строки и не обрезается</h4>
-            <p>Аннотация сразу под заголовком; обложки нет — следом идёт полоса «Поделиться»</p>
+            <p>Аннотация сразу под заголовком; обложки нет — сразу текст. «Поделиться» только внизу</p>
             <div class="bar"></div><div class="bar" style="width:80%"></div>
           </div>
         </div>
