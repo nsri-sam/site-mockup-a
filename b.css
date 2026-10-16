@@ -70,8 +70,9 @@ header::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; h
 .logo-name small { display: block; font-weight: 500; font-size: 12px; color: var(--muted); letter-spacing: 0; }
 nav { display: flex; gap: 12px; font-size: 15px; font-weight: 600; }
 .hd .chs { display: none; }
-nav a { padding: 28px 0; border-bottom: 3px solid transparent; }
-nav a:hover, nav a.on { border-color: var(--mark); }
+nav a { padding: 28px 0; border-bottom: 3px solid transparent; transition: color .2s; }
+nav a:not(.btn):hover { color: var(--accent); border-bottom-color: transparent; }
+nav a:not(.btn).on { color: var(--accent); border-bottom-color: transparent; }
 .hd-right { margin-left: auto; display: flex; align-items: center; gap: 16px; }
 #menu .nav-cta { display: none; }
 .burger { display: none; width: 44px; height: 44px; border: 1px solid var(--line); border-radius: var(--r); place-items: center; background: #fff; cursor: pointer; }
@@ -92,7 +93,7 @@ nav a:hover, nav a.on { border-color: var(--mark); }
   .hd-right { display: none; }
   #menu { flex: 1; justify-content: space-between; align-items: center; gap: 0; }
   #menu .nav-cta { display: inline-flex; padding: 15px 28px; border-bottom: 0; }
-  #menu .nav-cta:hover { border-bottom: 0; }
+  #menu .nav-cta:hover { border-bottom: 0; color: #fff; }
 }
 
 /* Иконки каналов: временные монограммы до получения официальных знаков платформ */
@@ -111,8 +112,8 @@ nav a:hover, nav a.on { border-color: var(--mark); }
 .btn-sec:hover, .btn-sec.is-hover { background: var(--band); }
 .btn-sec:focus-visible, .btn-sec.is-focus { outline: 3px solid var(--mark); outline-offset: 3px; }
 .btn-sec.is-disabled { border-color: var(--disabled-bg); color: var(--disabled); }
-.link { color: var(--accent); font-weight: 700; font-size: 16px; border-bottom: 1.5px solid currentColor; padding-bottom: 2px; }
-.link.is-hover { color: var(--accent-hover); border-bottom-width: 3px; }
+.link { color: var(--accent); font-weight: 700; font-size: 16px; border-bottom: 1.5px solid currentColor; padding-bottom: 2px; transition: color .2s, border-color .2s; }
+.link:hover, .link.is-hover { color: var(--accent-hover); border-bottom-color: currentColor; }
 .link.is-focus { outline: 3px solid var(--mark); outline-offset: 3px; }
 
 /* Заголовки разделов */
@@ -168,7 +169,8 @@ h3 { font-size: 24px; line-height: 1.25; font-weight: 700; letter-spacing: -.01e
 .nc-media { position: relative; border-radius: var(--photo-radius); overflow: hidden; }
 .nc-sum { position: absolute; inset: 0; background: rgba(0,0,0,.97); color: #fff; padding: 20px 22px; display: flex; flex-direction: column; justify-content: space-between; gap: 12px; opacity: 0; transform: translateY(8px); transition: opacity .2s, transform .2s; }
 .nc-sum p { font-size: 15px; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; overflow: hidden; }
-.nc-sum .more-l { font-size: 14px; font-weight: 700; color: #fff; align-self: flex-start; border-bottom: 1.5px solid var(--mark); padding-bottom: 2px; }
+.nc-sum .more-l { font-size: 14px; font-weight: 700; color: #fff; align-self: flex-start; border-bottom: 1.5px solid currentColor; padding-bottom: 2px; transition: color .2s; }
+.nc-sum .more-l:hover { color: var(--mark); }
 .ncard:hover .nc-sum, .ncard:focus-visible .nc-sum, .ncard.is-hover .nc-sum { opacity: 1; transform: none; }
 .ncard:focus-visible { outline: 3px solid var(--mark); outline-offset: 4px; border-radius: var(--r); }
 .nc-lead { display: none; font-size: 15px; line-height: 1.5; color: var(--muted); }
@@ -280,7 +282,7 @@ footer .chi { background: transparent; border-color: #3091D1; color: #fff; }
 .nav-sub { display: none; position: absolute; top: 100%; left: -16px; min-width: 220px; background: #fff; border: 1px solid var(--line); border-radius: var(--r); box-shadow: 0 12px 24px rgba(0,0,0,.08); padding: 8px 0; z-index: 7; }
 .has-sub:hover .nav-sub, .has-sub:focus-within .nav-sub { display: grid; }
 nav .nav-sub a { padding: 10px 16px; border-bottom: 0; font-weight: 500; white-space: nowrap; }
-nav .nav-sub a:hover, nav .nav-sub a.on { color: var(--text); background: var(--band); box-shadow: inset 3px 0 0 var(--mark); }
+nav .nav-sub a:hover, nav .nav-sub a.on { color: var(--accent); background: var(--band); box-shadow: inset 3px 0 0 var(--mark); }
 
 /* компактная кнопка заявки в шапке, когда меню свёрнуто в бургер */
 @media (max-width: 1199px) {
@@ -311,23 +313,16 @@ nav .nav-sub a:hover, nav .nav-sub a.on { color: var(--text); background: var(--
 .tasks-cta p span { display: block; font-size: 15px; font-weight: 400; color: var(--muted); margin-top: 4px; }
 .band .tasks-cta { background: #fff; border: 1px solid var(--line); border-left: 6px solid var(--accent); }
 
-/* Первый экран направлений и проектов: паттерн 07 «Схема» — полоса в нижнем отступе на всю ширину окна, не под текстом и не под фото.
-   У компактных шапок списков (.lhead) полосы нет: сразу под ними фильтры или фото */
+/* Первый экран направлений и проектов: паттерн 07 «Схема» заполняет весь блок на всю ширину окна (плитка 600 px, repeat).
+   У компактных шапок списков (.lhead) паттерна нет: сразу под ними фильтры или фото */
 .dhero, .phead { position: relative; isolation: isolate; }
-.dhero::after, .phead::after { content: ""; position: absolute; z-index: -1; bottom: 0; height: 56px; left: calc(50% - 50cqw); right: calc(50% - 50cqw); pointer-events: none;
-  background: url("patterns/07_shema_B.svg") 0 100%/var(--pat-size) repeat-x; opacity: var(--pat-opacity-hero);
-  -webkit-mask-image: linear-gradient(to top, #000 0, #000 20px, transparent 100%); mask-image: linear-gradient(to top, #000 0, #000 20px, transparent 100%); }
-.phead::after { height: 40px; }
+.dhero::after, .phead::after { content: ""; position: absolute; z-index: -1; inset: 0; left: calc(50% - 50cqw); right: calc(50% - 50cqw); pointer-events: none;
+  background: url("patterns/07_shema_B.svg") 0 0/var(--pat-size) repeat; opacity: var(--pat-opacity-hero); }
 
-/* Тёмный блок-призыв (#004E82): паттерн 06 «Изолинии» палитры В — линии темнее фона — в правой половине, как «Обсудить исследование» на главной */
+/* Тёмный блок-призыв (#004E82): паттерн 06 «Изолинии» палитры В заполняет весь блок */
 .cta-band { position: relative; isolation: isolate; overflow: hidden; }
-.cta-band::before { content: ""; position: absolute; top: 0; bottom: 0; left: 50%; right: 0; z-index: -1; pointer-events: none;
+.cta-band::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
   background: url("patterns/06_izolinii_V.svg") 0 0/var(--pat-size) repeat; opacity: var(--pat-opacity-zone); }
-@media (max-width: 767px) {
-  .dhero::after { height: 40px; }
-  .phead::after { height: 28px; }
-  .cta-band::before { left: 0; top: auto; height: 120px; }
-}
 
 /* оглавление и «Наверх» на телефоне */
 .toc-m, .to-top { display: none; }

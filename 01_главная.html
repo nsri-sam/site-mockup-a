@@ -14,11 +14,9 @@
 .hero-in { position: relative; display: flex; min-height: 600px; }
 .hero-panel { width: 54%; padding: 88px 56px 88px 0; display: flex; flex-direction: column; justify-content: center; position: relative; isolation: isolate; }
 .hero-panel::before { content: ""; position: absolute; top: 0; bottom: 0; right: 100%; width: 100vw; background: #fff; }
-/* паттерн 07 «Схема» — только в пустых полосах сверху и снизу текстовой колонки, не под фото и не под текстом */
+/* паттерн 07 «Схема» — заполняет всю текстовую колонку первого экрана (плитка 600 px, repeat), не под фото */
 .hero-panel::after { content: ""; position: absolute; z-index: -1; top: 0; bottom: 0; right: 0; left: -100vw; pointer-events: none;
-  background: url("patterns/07_shema_B.svg") 0 0/var(--pat-size) repeat; opacity: var(--pat-opacity-hero);
-  -webkit-mask-image: linear-gradient(to bottom, #000 0, #000 48px, transparent 84px, transparent calc(100% - 84px), #000 calc(100% - 48px), #000 100%);
-          mask-image: linear-gradient(to bottom, #000 0, #000 48px, transparent 84px, transparent calc(100% - 84px), #000 calc(100% - 48px), #000 100%); }
+  background: url("patterns/07_shema_B.svg") 0 0/var(--pat-size) repeat; opacity: var(--pat-opacity-hero); }
 .hero .eyebrow { margin-bottom: 28px; }
 /* «нейроисследования:» — одно слово шириной ~10,9 em, кегль следует за шириной колонки */
 .hero h1 { margin-bottom: 28px; font-size: clamp(28px, calc(4.4vw - 6px), 52px); }
@@ -26,15 +24,16 @@
 .lead { font-size: 20px; color: var(--muted); max-width: 28em; margin-bottom: 40px; }
 .hero-cta { display: flex; align-items: center; gap: 32px; }
 
-.tasks { display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid var(--line); }
-.task { display: grid; grid-template-columns: 64px 1fr; gap: 20px; align-items: start; padding: 28px 24px 28px 0; border-bottom: 1px solid var(--line); }
-.task:nth-child(odd) { border-right: 1px solid var(--line); }
-.task:nth-child(even) { padding-left: 32px; }
+.tasks { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.task { display: grid; grid-template-columns: 64px 1fr; gap: 20px; align-items: start; padding: 28px 24px; background: #fff; border: 1px solid var(--line); border-radius: var(--r-lg); box-shadow: var(--sh-md); transition: background .2s, border-color .2s, box-shadow .2s, color .2s; cursor: default; }
 /* номера задач и этапов цикла — кольцо с градиентом, цифра #006CB4 на белом (белый на #3091D1 не проходит AA) */
 .task .n, .cyc b { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; border: 3px solid transparent;
-  background: linear-gradient(#fff, #fff) padding-box, var(--g-brand) border-box; color: var(--accent); font: 700 15px/1 var(--font-display); letter-spacing: 0; }
-.task h3 { font-size: 20px; line-height: 1.35; font-weight: 700; margin-bottom: 6px; }
-.task p { font-size: 16px; color: var(--muted); }
+  background: linear-gradient(#fff, #fff) padding-box, var(--g-brand) border-box; color: var(--accent); font: 700 15px/1 var(--font-display); letter-spacing: 0; transition: background .2s, color .2s, border-color .2s; }
+.task h3 { font-size: 20px; line-height: 1.35; font-weight: 700; margin-bottom: 6px; transition: color .2s; }
+.task p { font-size: 16px; color: var(--muted); transition: color .2s; }
+.task:hover, .task.is-hover { background: var(--accent); border-color: var(--accent); box-shadow: var(--sh-lg); }
+.task:hover h3, .task:hover p, .task.is-hover h3, .task.is-hover p { color: #fff; }
+.task:hover .n, .task.is-hover .n { background: linear-gradient(var(--accent), var(--accent)) padding-box, #fff border-box; color: #fff; }
 
 .dirs { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--line); background: #fff; border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--sh-md); }
 .dir { display: flex; flex-direction: column; border-right: 1px solid var(--line); }
@@ -74,7 +73,8 @@
 .tl li:last-child::after { display: none; }
 .tl li.now::before { background: var(--mark); }
 .tl-y { font-family: "Montserrat", sans-serif; font-weight: 700; font-size: 18px; line-height: 1.35; color: var(--accent); }
-.tl .more-l { display: inline-block; margin-top: 8px; font-size: 15px; font-weight: 700; color: var(--accent); border-bottom: 1.5px solid var(--mark); padding-bottom: 1px; }
+.tl .more-l { display: inline-block; margin-top: 8px; font-size: 15px; font-weight: 700; color: var(--accent); border-bottom: 1.5px solid currentColor; padding-bottom: 1px; transition: color .2s; }
+.tl .more-l:hover { color: var(--accent-hover); }
 .gzd .hist-src { font-size: 13px; margin-top: 20px; }
 
 .flag { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
@@ -109,9 +109,9 @@ section.block:has(> .wrap > .nums)::before { content: ""; position: absolute; in
 .cform .contacts div { display: grid; grid-template-columns: 110px 1fr; gap: 16px; font-size: 16px; }
 .cform .contacts small { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); padding-top: 3px; }
 .fbox { background: #fff; border: 1px solid var(--line); border-radius: var(--r-lg); box-shadow: var(--sh-md); padding: 40px; display: grid; gap: 22px; }
-/* свободная зона: паттерн 06 «Изолинии» только в правой половине, под сплошной формой */
+/* свободная зона: паттерн 06 «Изолинии» заполняет весь блок; форма — на сплошной белой панели */
 #obsudit-nir { position: relative; isolation: isolate; overflow: hidden; }
-#obsudit-nir::before { content: ""; position: absolute; top: 0; bottom: 0; left: 50%; right: 0; z-index: -1; pointer-events: none;
+#obsudit-nir::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
   background: url("patterns/06_izolinii_B.svg") 0 0/var(--pat-size) repeat; opacity: var(--pat-opacity-zone); }
 .fbox .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 .fbox .actions { display: flex; align-items: center; gap: 24px; }
@@ -128,8 +128,8 @@ section.block:has(> .wrap > .nums)::before { content: ""; position: absolute; in
   .lead { font-size: 17px; margin-bottom: 28px; }
   .hero-cta { flex-direction: column; align-items: stretch; gap: 18px; }
   .hero-cta .link { align-self: flex-start; }
-  .tasks { grid-template-columns: 1fr; }
-  .task, .task:nth-child(even) { grid-template-columns: 36px 1fr; padding: 20px 0; border-right: 0; }
+  .tasks { grid-template-columns: 1fr; gap: 12px; }
+  .task { grid-template-columns: 36px 1fr; padding: 20px 16px; }
   .task .n, .cyc b { width: 36px; height: 36px; font-size: 13px; }
   .task h3 { font-size: 17px; }
   .task p { font-size: 15px; }
@@ -170,14 +170,12 @@ section.block:has(> .wrap > .nums)::before { content: ""; position: absolute; in
   .cform .contacts { margin-top: 24px; }
   .cform .contacts div { grid-template-columns: 1fr; gap: 2px; }
   .fbox { padding: 20px; gap: 18px; }
-  #obsudit-nir::before { left: 0; top: auto; height: 160px; }
   .fbox .row2 { grid-template-columns: 1fr; }
   .fbox .actions { flex-direction: column; align-items: stretch; }
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
-  .task { grid-template-columns: 48px 1fr; gap: 16px; padding-right: 16px; }
-  .task:nth-child(even) { padding-left: 20px; }
+  .task { grid-template-columns: 48px 1fr; gap: 16px; padding: 24px 20px; }
   .task h3 { font-size: 18px; }
   .dirs { grid-template-columns: 1fr; }
   .dir { display: grid; grid-template-columns: 2fr 3fr; border-right: 0; border-bottom: 1px solid var(--line); }
@@ -218,7 +216,7 @@ section.block:has(> .wrap > .nums)::before { content: ""; position: absolute; in
       <div class="hero-panel">
         <div class="eyebrow">Научно-исследовательский институт нейронаук</div>
         <h1 class="ph">Прикладные нейроисследования: <em>от гипотезы — к&nbsp;прототипу</em></h1>
-        <p class="lead ph">Исследования и разработки на базе СамГМУ.</p>
+        <p class="lead ph">Исследования и разработки на базе СамГМУ</p>
         <div class="hero-cta"><a class="btn" href="#obsudit-nir">Обсудить исследование</a><a class="link" href="#proekty">Смотреть проекты</a></div>
       </div>
     </div>
@@ -226,28 +224,28 @@ section.block:has(> .wrap > .nums)::before { content: ""; position: absolute; in
 
   <section class="block">
     <div class="wrap">
-      <div class="sec-head"><div><div class="sec-num">Задачи</div><h2>С какими задачами к нам приходят</h2></div><p class="sub ph">Это для вас, если нужно проверить идею измерениями, а не мнениями, — и довести её до прототипа.</p></div>
+      <div class="sec-head"><div><div class="sec-num">Задачи</div><h2>С какими задачами к нам приходят</h2></div><p class="sub ph">Это для вас, если нужно проверить идею измерениями, а не мнениями, — и довести её до прототипа</p></div>
       <div class="tasks">
-        <div class="task"><span class="n">01</span><div><h3 class="ph">Нужны нейрофизиологические данные для разработки цифрового медицинского решения</h3><p>Протокол, конечные точки, исследовательские данные.</p></div></div>
-        <div class="task"><span class="n">02</span><div><h3>Нужны объективные показатели в исследовании реабилитационной методики</h3><p>Анализ движений, VR-среда, биосигналы.</p></div></div>
-        <div class="task"><span class="n">03</span><div><h3>Нужен нейрокогнитивный модуль в исследовании</h3><p>ЭЭГ, айтрекинг, когнитивные пробы.</p></div></div>
-        <div class="task"><span class="n">04</span><div><h3>Нужно управлять устройством по биосигналам</h3><p>Интерфейсы мозг — компьютер, сенсорная обратная связь.</p></div></div>
-        <div class="task"><span class="n">05</span><div><h3>Нужно понять реакцию пользователей на интерфейс или рекламу</h3><p>ЭЭГ, биометрия, айтрекинг — три источника данных.</p></div></div>
-        <div class="task"><span class="n">06</span><div><h3>Нужно проверить гипотезу до вложений в разработку</h3><p>Научная проработка и эксперимент до прототипа.</p></div></div>
+        <div class="task"><span class="n">01</span><div><h3 class="ph">Нужны нейрофизиологические данные для разработки цифрового медицинского решения</h3><p>Протокол, конечные точки, исследовательские данные</p></div></div>
+        <div class="task"><span class="n">02</span><div><h3>Нужны объективные показатели в исследовании реабилитационной методики</h3><p>Анализ движений, VR-среда, биосигналы</p></div></div>
+        <div class="task"><span class="n">03</span><div><h3>Нужен нейрокогнитивный модуль в исследовании</h3><p>ЭЭГ, айтрекинг, когнитивные пробы</p></div></div>
+        <div class="task"><span class="n">04</span><div><h3>Нужно управлять устройством по биосигналам</h3><p>Интерфейсы мозг — компьютер, сенсорная обратная связь</p></div></div>
+        <div class="task"><span class="n">05</span><div><h3>Нужно понять реакцию пользователей на интерфейс или рекламу</h3><p>ЭЭГ, биометрия, айтрекинг — три источника данных</p></div></div>
+        <div class="task"><span class="n">06</span><div><h3>Нужно проверить гипотезу до вложений в разработку</h3><p>Научная проработка и эксперимент до прототипа</p></div></div>
       </div>
-      <div class="tasks-cta"><p>Узнали свою задачу? <span>Опишите её своими словами — предложим, как проверить.</span></p><a class="btn-sec" href="#obsudit-nir">Обсудить задачу</a></div>
+      <div class="tasks-cta"><p>Узнали свою задачу? <span>Опишите её своими словами — предложим, как проверить</span></p><a class="btn-sec" href="#obsudit-nir">Обсудить задачу</a></div>
     </div>
   </section>
 
   <section class="block band" id="napravleniya">
     <div class="wrap">
-      <div class="sec-head"><div><div class="sec-num">Направления</div><h2>Направления прикладных исследований</h2></div><p class="sub ph">От нейрофизиологической оценки до исследований поведения потребителей — полным циклом, от гипотезы до прототипа.</p></div>
+      <div class="sec-head"><div><div class="sec-num">Направления</div><h2>Направления прикладных исследований</h2></div><p class="sub ph">От нейрофизиологической оценки до исследований поведения потребителей — полным циклом, от гипотезы до прототипа</p></div>
       <div class="dirs">
-        <a class="dir" href="07_направление_нейродиагностика.html"><div class="photo-ph"><span>Фото: регистрация ЭЭГ или айтрекинг в лаборатории НИИ — оборудование и исследователь за работой<br>реальная съёмка, 4:3</span></div><div class="dir-body"><h3>Нейродиагностика и мониторинг</h3><p class="ph">Исследование функционального состояния нервной системы: ЭЭГ, айтрекинг, биосигналы, когнитивный скрининг, мониторинг сна.</p>
+        <a class="dir" href="07_направление_нейродиагностика.html"><div class="photo-ph"><span>Фото: регистрация ЭЭГ или айтрекинг в лаборатории НИИ — оборудование и исследователь за работой<br>реальная съёмка, 4:3</span></div><div class="dir-body"><h3>Нейродиагностика и мониторинг</h3><p class="ph">Исследование функционального состояния нервной системы: ЭЭГ, айтрекинг, биосигналы, когнитивный скрининг, мониторинг сна</p>
           <span class="btn-sec dir-more">Подробнее</span></div></a>
-        <a class="dir" href="08_направление_реабилитация.html"><div class="photo-ph"><span>Фото: занятие в VR-среде или анализ движений — VR-шлем, тактильная перчатка, экран с моделью движения<br>реальная съёмка, 4:3, без узнаваемых лиц пациентов</span></div><div class="dir-body"><h3>Реабилитация</h3><p class="ph">Технологии и объективная оценка для реабилитации: анализ движений, VR-среда, биологическая обратная связь, нейроинтерфейсы.</p>
+        <a class="dir" href="08_направление_реабилитация.html"><div class="photo-ph"><span>Фото: занятие в VR-среде или анализ движений — VR-шлем, тактильная перчатка, экран с моделью движения<br>реальная съёмка, 4:3, без узнаваемых лиц пациентов</span></div><div class="dir-body"><h3>Реабилитация</h3><p class="ph">Технологии и объективная оценка для реабилитации: анализ движений, VR-среда, биологическая обратная связь, нейроинтерфейсы</p>
           <span class="btn-sec dir-more">Подробнее</span></div></a>
-        <a class="dir" href="09_направление_нейромаркетинг.html"><div class="photo-ph"><span>Фото: айтрекинг-исследование — участник смотрит на сайт или рекламу, на втором мониторе карта взгляда<br>реальная съёмка, 4:3, без логотипов заказчиков</span></div><div class="dir-body"><h3>Нейромаркетинг</h3><p class="ph">Как люди реагируют на рекламу, упаковку, сайт и сервис: ЭЭГ, биометрия, айтрекинг — три источника данных.</p>
+        <a class="dir" href="09_направление_нейромаркетинг.html"><div class="photo-ph"><span>Фото: айтрекинг-исследование — участник смотрит на сайт или рекламу, на втором мониторе карта взгляда<br>реальная съёмка, 4:3, без логотипов заказчиков</span></div><div class="dir-body"><h3>Нейромаркетинг</h3><p class="ph">Как люди реагируют на рекламу, упаковку, сайт и сервис: ЭЭГ, биометрия, айтрекинг — три источника данных</p>
           <span class="btn-sec dir-more">Подробнее</span></div></a>
       </div>
     </div>
@@ -255,29 +253,29 @@ section.block:has(> .wrap > .nums)::before { content: ""; position: absolute; in
 
   <section class="block" id="o-centre">
     <div class="wrap">
-      <div class="sec-head"><div><div class="sec-num">Наш подход</div><h2>Полный цикл — от гипотезы до прототипа</h2></div><p class="sub ph">Можно зайти на любом этапе: с идеей, с данными или с готовым решением, которое нужно проверить.</p></div>
+      <div class="sec-head"><div><div class="sec-num">Наш подход</div><h2>Полный цикл — от гипотезы до прототипа</h2></div><p class="sub ph">Можно зайти на любом этапе: с идеей, с данными или с готовым решением, которое нужно проверить</p></div>
       <div class="cyc">
-        <div><span class="arrow">→</span><b>01</b><h3>Гипотеза</h3><p class="ph">Формулируем вопрос заказчика как проверяемую гипотезу.</p></div>
-        <div><span class="arrow">→</span><b>02</b><h3>Научная проработка идеи</h3><p class="ph">Обзор методов и данных, дизайн исследования.</p></div>
-        <div><span class="arrow">→</span><b>03</b><h3>Экспериментальная проверка гипотез</h3><p class="ph">Измерения в лаборатории: ЭЭГ, айтрекинг, биосигналы.</p></div>
-        <div><b>04</b><h3>Разработка прототипа</h3><p class="ph">Макет устройства, ПО или методики по результатам проверки.</p></div>
+        <div><span class="arrow">→</span><b>01</b><h3>Гипотеза</h3><p class="ph">Формулируем вопрос заказчика как проверяемую гипотезу</p></div>
+        <div><span class="arrow">→</span><b>02</b><h3>Научная проработка идеи</h3><p class="ph">Обзор методов и данных, дизайн исследования</p></div>
+        <div><span class="arrow">→</span><b>03</b><h3>Экспериментальная проверка гипотез</h3><p class="ph">Измерения в лаборатории: ЭЭГ, айтрекинг, биосигналы</p></div>
+        <div><b>04</b><h3>Разработка прототипа</h3><p class="ph">Макет устройства, ПО или методики по результатам проверки</p></div>
       </div>
     </div>
   </section>
 
   <section class="block band" id="proekty">
     <div class="wrap">
-      <div class="sec-head"><div><div class="sec-num">Проекты</div><h2>Флагманские проекты</h2></div><p class="sub ph">Три проекта — по одному из каждого направления. Остальные — на странице «Все проекты».</p></div>
+      <div class="sec-head"><div><div class="sec-num">Проекты</div><h2>Флагманские проекты</h2></div><p class="sub ph">Три проекта — по одному из каждого направления. Остальные — на странице «Все проекты»</p></div>
       <div class="flag">
-        <a class="pcard" href="13_проект_Нейро-зеркало.html"><div class="pc-media"><div class="photo-ph"><span>Фото проекта: реальная съёмка<br>(генеративные изображения запрещены)</span></div><div class="nc-sum"><p>Разрабатываемая система для регулярного скрининга и мониторинга когнитивного состояния людей 60 лет и старше и подбора когнитивных тренировок. Диагноз не ставит: результаты интерпретирует специалист.</p><span class="more-b">Подробнее</span></div></div><div class="pcard-b">
+        <a class="pcard" href="13_проект_Нейро-зеркало.html"><div class="pc-media"><div class="photo-ph"><span>Фото проекта: реальная съёмка<br>(генеративные изображения запрещены)</span></div><div class="nc-sum"><p>Разрабатываемая система для регулярного скрининга и мониторинга когнитивного состояния людей 60 лет и старше и подбора когнитивных тренировок. Диагноз не ставит: результаты интерпретирует специалист</p><span class="more-b">Подробнее</span></div></div><div class="pcard-b">
           <span class="tag dir">Нейродиагностика и мониторинг</span>
-          <h3>«Нейро-зеркало»</h3><p class="nc-lead">Разрабатываемая система для регулярного скрининга и мониторинга когнитивного состояния людей 60 лет и старше и подбора когнитивных тренировок. Диагноз не ставит: результаты интерпретирует специалист.</p></div></a>
-        <a class="pcard" href="14_проект_CROATLE.html"><div class="pc-media"><div class="photo-ph"><span>Фото проекта: реальная съёмка</span></div><div class="nc-sum"><p>Оценка подвижности суставов конечностей по видео с обычной веб-камеры: компьютерное зрение измеряет углы и амплитуду движений при стандартизированных упражнениях и показывает динамику восстановления. Исследовательский прототип.</p><span class="more-b">Подробнее</span></div></div><div class="pcard-b">
+          <h3>«Нейро-зеркало»</h3><p class="nc-lead">Разрабатываемая система для регулярного скрининга и мониторинга когнитивного состояния людей 60 лет и старше и подбора когнитивных тренировок. Диагноз не ставит: результаты интерпретирует специалист</p></div></a>
+        <a class="pcard" href="14_проект_CROATLE.html"><div class="pc-media"><div class="photo-ph"><span>Фото проекта: реальная съёмка</span></div><div class="nc-sum"><p>Оценка подвижности суставов конечностей по видео с обычной веб-камеры: компьютерное зрение измеряет углы и амплитуду движений при стандартизированных упражнениях и показывает динамику восстановления. Исследовательский прототип</p><span class="more-b">Подробнее</span></div></div><div class="pcard-b">
           <span class="tag dir">Реабилитация</span>
-          <h3>CROATLE</h3><p class="nc-lead">Оценка подвижности суставов конечностей по видео с обычной веб-камеры: компьютерное зрение измеряет углы и амплитуду движений при стандартизированных упражнениях и показывает динамику восстановления. Исследовательский прототип.</p></div></a>
-        <a class="pcard" href="02_проект.html"><div class="pc-media"><div class="photo-ph"><span>Фото проекта: реальная съёмка<br>(без логотипов заказчика)</span></div><div class="nc-sum"><p class="ph">Как потенциальные клиенты банка реагируют на этапы оформления услуги на сайте — и где путь можно упростить. Айтрекинг, ЭЭГ, биометрия, интервью.</p><span class="more-b">Подробнее</span></div></div><div class="pcard-b">
+          <h3>CROATLE</h3><p class="nc-lead">Оценка подвижности суставов конечностей по видео с обычной веб-камеры: компьютерное зрение измеряет углы и амплитуду движений при стандартизированных упражнениях и показывает динамику восстановления. Исследовательский прототип</p></div></a>
+        <a class="pcard" href="02_проект.html"><div class="pc-media"><div class="photo-ph"><span>Фото проекта: реальная съёмка<br>(без логотипов заказчика)</span></div><div class="nc-sum"><p class="ph">Как потенциальные клиенты банка реагируют на этапы оформления услуги на сайте — и где путь можно упростить. Айтрекинг, ЭЭГ, биометрия, интервью</p><span class="more-b">Подробнее</span></div></div><div class="pcard-b">
           <span class="tag dir">Нейромаркетинг</span>
-          <h3>Нейроисследование пользовательского пути</h3><p class="nc-lead ph">Как потенциальные клиенты банка реагируют на этапы оформления услуги на сайте — и где путь можно упростить.</p></div></a>
+          <h3>Нейроисследование пользовательского пути</h3><p class="nc-lead ph">Как потенциальные клиенты банка реагируют на этапы оформления услуги на сайте — и где путь можно упростить</p></div></a>
       </div>
       <div class="sec-foot"><a class="link" href="06_проекты.html">Все проекты</a></div>
     </div>
@@ -289,8 +287,8 @@ section.block:has(> .wrap > .nums)::before { content: ""; position: absolute; in
         <div class="hist-intro">
           <div class="sec-num">О НИИ</div>
           <h2>История</h2>
-          <p>НИИ нейронаук СамГМУ создан 1 февраля 2021 года приказом ректора № 25 от 28.01.2021 на основании решения Учёного совета университета от 27.11.2020. Институт сформирован как ответ на глобальные вызовы в области нейронаук, медицины и цифровых технологий.</p>
-          <p>Научная деятельность охватывает фундаментальные, прикладные и трансляционные исследования: от принципов работы нервной системы до нейротехнологий для медицины и инженерных систем.</p>
+          <p>НИИ нейронаук СамГМУ создан 1 февраля 2021 года приказом ректора № 25 от 28.01.2021 на основании решения Учёного совета университета от 27.11.2020. Институт сформирован как ответ на глобальные вызовы в области нейронаук, медицины и цифровых технологий</p>
+          <p>Научная деятельность охватывает фундаментальные, прикладные и трансляционные исследования: от принципов работы нервной системы до нейротехнологий для медицины и инженерных систем</p>
           <div class="labs">
             <h3>В составе НИИ — пять научных лабораторий</h3>
             <ul>
@@ -319,27 +317,27 @@ section.block:has(> .wrap > .nums)::before { content: ""; position: absolute; in
 
   <section class="block band" id="komanda">
     <div class="wrap">
-      <div class="sec-head"><div><div class="sec-num">Команда</div><h2>Команда НИИ</h2></div><p class="sub ph">Нейрофизиологи, врачи, инженеры и аналитики данных ведут исследование от протокола до прототипа.</p></div>
+      <div class="sec-head"><div><div class="sec-num">Команда</div><h2>Команда НИИ</h2></div><p class="sub ph">Нейрофизиологи, врачи, инженеры и аналитики данных ведут исследование от протокола до прототипа</p></div>
       <div class="staff5">
         <article class="staff"><div class="photo-ph"><span>Фото сотрудника<br>портрет 4:5</span></div><div class="staff-b">
           <h3>Захаров Александр Владимирович</h3>
           <p class="pos">Директор НИИ нейронаук, канд. мед. наук</p>
-          <p class="proj">Участвовал в разработке 4 медицинских изделий по государственному заданию. Руководитель проекта по разработке медицинского изделия ReviX.</p></div></article>
+          <p class="proj">Участвовал в разработке 4 медицинских изделий по государственному заданию. Руководитель проекта по разработке медицинского изделия ReviX</p></div></article>
         <article class="staff"><div class="photo-ph"><span>Фото сотрудника<br>портрет 4:5</span></div><div class="staff-b">
           <h3>Романчук Наталья Петровна</h3>
           <p class="pos">Заведующая лабораторией нейроморфных систем</p>
-          <p class="proj">Руководитель проекта по разработке медицинского изделия для ранней диагностики травматического повреждения головного мозга.</p></div></article>
+          <p class="proj">Руководитель проекта по разработке медицинского изделия для ранней диагностики травматического повреждения головного мозга</p></div></article>
         <article class="staff"><div class="photo-ph"><span>Фото сотрудника<br>портрет 4:5</span></div><div class="staff-b">
           <h3>Сергеева Мария Станиславовна</h3>
           <p class="pos">Ведущий специалист лаборатории нейроинтерфейсов и нейротехнологий, канд. биол. наук</p>
-          <p class="proj">Руководитель проекта по разработке медицинского изделия для мониторинга и сохранения когнитивного здоровья лиц старшего возраста.</p></div></article>
+          <p class="proj">Руководитель проекта по разработке медицинского изделия для мониторинга и сохранения когнитивного здоровья лиц старшего возраста</p></div></article>
         <article class="staff"><div class="photo-ph"><span>Фото сотрудника<br>портрет 4:5</span></div><div class="staff-b">
           <h3>Адельшин Павел Александрович</h3>
           <p class="pos">Технический руководитель междисциплинарной команды разработки</p></div></article>
         <article class="staff"><div class="photo-ph"><span>Фото сотрудника<br>портрет 4:5</span></div><div class="staff-b">
           <h3>Бубнова Екатерина Петровна</h3>
           <p class="pos">Аналитик</p>
-          <p class="proj">Куратор проекта по разработке медицинского изделия для мониторинга и сохранения когнитивного здоровья лиц старшего возраста.</p></div></article>
+          <p class="proj">Куратор проекта по разработке медицинского изделия для мониторинга и сохранения когнитивного здоровья лиц старшего возраста</p></div></article>
       </div>
       <div class="sec-foot"><a class="link" href="11_команда.html">Вся команда</a></div>
     </div>
@@ -362,11 +360,11 @@ section.block:has(> .wrap > .nums)::before { content: ""; position: absolute; in
 
   <section class="block band" id="novosti">
     <div class="wrap">
-      <div class="sec-head"><div><div class="sec-num">Новости</div><h2>Жизнь НИИ нейронаук</h2></div><p class="sub ph">Публикации, события и результаты исследований.</p></div>
+      <div class="sec-head"><div><div class="sec-num">Новости</div><h2>Жизнь НИИ нейронаук</h2></div><p class="sub ph">Публикации, события и результаты исследований</p></div>
       <div class="news">
-        <a class="ncard" href="05_новость.html"><div class="nc-media"><div class="photo-ph"><span>Фото к новости</span></div><div class="nc-sum"><p class="ph">Краткая суть новости — аннотация из CMS, до 250 знаков: что произошло и почему это важно. Плейсхолдер, не публиковать.</p><span class="more-l">Читать новость →</span></div></div><time class="ph">ДД.ММ.ГГГГ</time><h3 class="ph">Заголовок новости — плейсхолдер, не публиковать</h3><p class="nc-lead ph">Краткая суть новости — аннотация из CMS, до 250 знаков: что произошло и почему это важно. Плейсхолдер, не публиковать.</p><div class="tags"><span class="tag">тег</span><span class="tag">тег</span></div></a>
-        <a class="ncard" href="05_новость.html"><div class="nc-media"><div class="photo-ph"><span>Фото к новости</span></div><div class="nc-sum"><p class="ph">Длинная аннотация для проверки: текст на обложке обрезается на пятой строке многоточием, чтобы панель не вылезала за кадр 16:9, даже если редактор заполнил поле на максимум в двести пятьдесят знаков. Плейсхолдер.</p><span class="more-l">Читать новость →</span></div></div><time class="ph">ДД.ММ.ГГГГ</time><h3 class="ph">Заголовок новости в две строки — проверка длинного заголовка на карточке</h3><p class="nc-lead ph">Длинная аннотация для проверки: текст на обложке обрезается на пятой строке многоточием, чтобы панель не вылезала за кадр 16:9, даже если редактор заполнил поле на максимум в двести пятьдесят знаков. Плейсхолдер.</p><div class="tags"><span class="tag">тег</span></div></a>
-        <a class="ncard" href="05_новость.html"><div class="nc-media"><div class="photo-ph"><span>Фото к новости</span></div><div class="nc-sum"><p class="ph">Короткая аннотация — одна строка. Плейсхолдер.</p><span class="more-l">Читать новость →</span></div></div><time class="ph">ДД.ММ.ГГГГ</time><h3 class="ph">Заголовок новости — плейсхолдер</h3><p class="nc-lead ph">Короткая аннотация — одна строка. Плейсхолдер.</p><div class="tags"><span class="tag">тег</span><span class="tag">тег</span></div></a>
+        <a class="ncard" href="05_новость.html"><div class="nc-media"><div class="photo-ph"><span>Фото к новости</span></div><div class="nc-sum"><p class="ph">Краткая суть новости — аннотация из CMS, до 250 знаков: что произошло и почему это важно. Плейсхолдер, не публиковать</p><span class="more-l">Читать новость →</span></div></div><time class="ph">ДД.ММ.ГГГГ</time><h3 class="ph">Заголовок новости — плейсхолдер, не публиковать</h3><p class="nc-lead ph">Краткая суть новости — аннотация из CMS, до 250 знаков: что произошло и почему это важно. Плейсхолдер, не публиковать</p><div class="tags"><span class="tag">тег</span><span class="tag">тег</span></div></a>
+        <a class="ncard" href="05_новость.html"><div class="nc-media"><div class="photo-ph"><span>Фото к новости</span></div><div class="nc-sum"><p class="ph">Длинная аннотация для проверки: текст на обложке обрезается на пятой строке многоточием, чтобы панель не вылезала за кадр 16:9, даже если редактор заполнил поле на максимум в двести пятьдесят знаков. Плейсхолдер</p><span class="more-l">Читать новость →</span></div></div><time class="ph">ДД.ММ.ГГГГ</time><h3 class="ph">Заголовок новости в две строки — проверка длинного заголовка на карточке</h3><p class="nc-lead ph">Длинная аннотация для проверки: текст на обложке обрезается на пятой строке многоточием, чтобы панель не вылезала за кадр 16:9, даже если редактор заполнил поле на максимум в двести пятьдесят знаков. Плейсхолдер</p><div class="tags"><span class="tag">тег</span></div></a>
+        <a class="ncard" href="05_новость.html"><div class="nc-media"><div class="photo-ph"><span>Фото к новости</span></div><div class="nc-sum"><p class="ph">Короткая аннотация — одна строка. Плейсхолдер</p><span class="more-l">Читать новость →</span></div></div><time class="ph">ДД.ММ.ГГГГ</time><h3 class="ph">Заголовок новости — плейсхолдер</h3><p class="nc-lead ph">Короткая аннотация — одна строка. Плейсхолдер</p><div class="tags"><span class="tag">тег</span><span class="tag">тег</span></div></a>
       </div>
       <div class="sec-foot"><a class="link" href="10_новости.html">Все новости</a></div>
     </div>
@@ -377,7 +375,7 @@ section.block:has(> .wrap > .nums)::before { content: ""; position: absolute; in
       <div>
         <div class="sec-num">Заявка</div>
         <h2 id="obsudit-nir-h" tabindex="-1">Обсудить исследование</h2>
-        <p class="sub ph" style="margin-top:20px">Опишите задачу своими словами — мы предложим, как её проверить.</p>
+        <p class="sub ph" style="margin-top:20px">Опишите задачу своими словами — мы предложим, как её проверить</p>
         <div class="contacts">
           <div><small>E-mail</small><span>e.p.bubnova@samsmu.ru</span></div>
           <div><small>Телефон</small><span>+7 (846) 374-10-04 доб. 4132</span></div>
@@ -400,7 +398,7 @@ section.block:has(> .wrap > .nums)::before { content: ""; position: absolute; in
       <div class="fbox mf-ok" id="hf-ok" hidden>
         <span class="mark">✓</span><h3 tabindex="-1">Спасибо, заявка отправлена</h3>
         <div class="num"><small>Номер заявки</small><b class="ph">20261002-018</b></div>
-        <p class="ph">Ответим на указанный e-mail в течение [срок — решение руководителя].</p>
+        <p class="ph">Ответим на указанный e-mail в течение [срок — решение руководителя]</p>
         <button class="btn-sec" type="button" id="hf-again">Отправить ещё одну заявку</button>
       </div>
       </div>
@@ -413,7 +411,7 @@ section.block:has(> .wrap > .nums)::before { content: ""; position: absolute; in
     <div class="ft">
       <div>
         <a class="logo" href="#"><img class="logo-samsmu" src="img/samgmu.svg" alt="СамГМУ" width="32" height="52"><img class="logo-nii" src="img/nii-neuro.png" alt="НИИ нейронаук" width="44" height="44"><span class="logo-name">НИИ нейронаук<small>СамГМУ Минздрава России</small></span></a>
-        <p style="margin-top:20px">Научно-исследовательский институт нейронаук ФГБОУ ВО СамГМУ Минздрава России</p><p class="ft-note">НИИ не оказывает медицинскую помощь. Запись на приём — в <a href="https://clinica.samsmu.ru/" target="_blank" rel="noopener">Клиниках СамГМУ</a>.</p>
+        <p style="margin-top:20px">Научно-исследовательский институт нейронаук ФГБОУ ВО СамГМУ Минздрава России</p><p class="ft-note">НИИ не оказывает медицинскую помощь. Запись на приём — в <a href="https://clinica.samsmu.ru/" target="_blank" rel="noopener">Клиниках СамГМУ</a></p>
       </div>
       <div><h4>Разделы</h4><ul><li><a href="#napravleniya">Направления</a></li><li><a href="#o-centre">Наш подход</a></li><li><a href="#proekty">Проекты</a></li><li><a href="#o-nii">О НИИ</a></li><li><a href="#komanda">Команда</a></li><li><a href="#novosti">Новости</a></li><li><a href="#kontakty">Контакты</a></li></ul></div>
       <div><h4>Каналы</h4><div class="chs" style="flex-wrap:wrap"><span class="chi">TG</span><span class="chi">MAX</span><a class="chi" href="https://vk.com/nsri_samsmu" target="_blank" rel="noopener">VK</a><span class="chi">Дз</span><span class="chi">ЯП</span><span class="chi">RT</span></div></div>
