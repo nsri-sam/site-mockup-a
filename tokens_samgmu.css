@@ -24,8 +24,8 @@
   --g-brand:linear-gradient(90deg,#006CB4 0%,#3091D1 100%);
   --g-strip-h:3px;
 
-  /* Паттерны: масштаб 1:1 (плитка 600 px) по листу решений, тихая непрозрачность */
-  --pat-size:600px; --pat-opacity-hero:.55; --pat-opacity-band:.5; --pat-opacity-zone:.45;
+  /* Паттерны: масштаб 1:1 (плитка 600 px); пониженная непрозрачность — паттерн тише фона */
+  --pat-size:600px; --pat-opacity-hero:.28; --pat-opacity-band:.25; --pat-opacity-zone:.22;
 
   /* Фото */
   --photo-radius:12px; --photo-hero-tint:rgba(0,108,180,.08);
