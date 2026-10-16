@@ -174,3 +174,24 @@
 
 .cav { margin-top: 32px; padding: 16px 20px; border-left: 6px solid var(--accent); border-radius: 0 var(--r-md) var(--r-md) 0; background: var(--band); font-size: 15px; color: var(--text); max-width: 52em; }
 @media (max-width: 767px) { .cav { font-size: 14px; margin-top: 8px; } }
+
+/* Нейродиагностика: паттерн 01 «ЭЭГ» палитры Б вместо «Схемы» на первом экране и на серых полосах */
+body.page-eeg .dhero::after {
+  background-image: url("patterns/01_eeg_B.svg");
+}
+body.page-eeg .block.band {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+body.page-eeg .block.band::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  left: calc(50% - 50cqw);
+  right: calc(50% - 50cqw);
+  pointer-events: none;
+  background: url("patterns/01_eeg_B.svg") 0 0 / var(--pat-size) repeat;
+  opacity: var(--pat-opacity-band);
+}
