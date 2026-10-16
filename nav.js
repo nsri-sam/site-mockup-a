@@ -41,8 +41,24 @@
     });
     if (!items.length) return;
     function update() {
-      var y = window.scrollY + 120, cur = null;
-      items.forEach(function (it) { if (it.el.offsetTop <= y) cur = it; });
+      // Берём блок с максимальным top среди уже пройденных — по положению на странице,
+      // не по порядку ссылок в меню (иначе «Наш подход» выше «Проектов» перебивает подсветку).
+      var y = window.scrollY + 120;
+      var bestTop = -Infinity;
+      var bestEl = null;
+      items.forEach(function (it) {
+        var top = it.el.getBoundingClientRect().top + window.scrollY;
+        if (top <= y && top > bestTop) {
+          bestTop = top;
+          bestEl = it.el;
+        }
+      });
+      var cur = null;
+      items.forEach(function (it) {
+        if (it.el !== bestEl) return;
+        // один якорь на двух ссылках (#o-nii): предпочитаем пункт подменю, не .sub-t
+        if (!cur || (it.a.closest(".nav-sub") && !cur.a.closest(".nav-sub"))) cur = it;
+      });
       items.forEach(function (it) { it.a.classList.toggle("on", it === cur); });
       Array.prototype.forEach.call(document.querySelectorAll("#menu .has-sub"), function (h) {
         if (!h.querySelector('.nav-sub a[href^="#"]')) return;
