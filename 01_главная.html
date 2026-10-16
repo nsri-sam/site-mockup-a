@@ -7,16 +7,17 @@
 <link rel="stylesheet" href="b.css">
 <style>
 .hero { position: relative; border-bottom: 1px solid var(--line); }
-.hero-img { position: absolute; inset: 24px 0 24px 52%; }
-.hero-img .photo-ph { height: 100%; aspect-ratio: auto; font-size: 15px; border-radius: var(--photo-radius) 0 0 var(--photo-radius); }
-.hero-img .photo-ph::before { content: ""; position: absolute; inset: 0; background: var(--photo-hero-tint); pointer-events: none; }
-.hero-img .photo-ph::after { content: "Фото: реальная лабораторная съёмка, без фильтров · лёгкий тон #006CB4 только здесь"; }
-.hero-in { position: relative; display: flex; min-height: 600px; }
-.hero-panel { width: 54%; padding: 88px 56px 88px 0; display: flex; flex-direction: column; justify-content: center; position: relative; isolation: isolate; }
+/* фото внутри .wrap: рамка не выходит за центральную колонку (max 1280 px) */
+.hero-in { position: relative; display: grid; grid-template-columns: 1.05fr 1fr; gap: 40px; align-items: stretch; min-height: 600px; padding: 40px 0; }
+.hero-panel { padding: 48px 8px 48px 0; display: flex; flex-direction: column; justify-content: center; position: relative; isolation: isolate; min-width: 0; }
 .hero-panel::before { content: ""; position: absolute; top: 0; bottom: 0; right: 100%; width: 100vw; background: #fff; }
-/* паттерн 07 «Схема» — заполняет всю текстовую колонку первого экрана (плитка 600 px, repeat), не под фото */
+/* паттерн 03 «Взгляд» — под текстовой колонкой, не под фото */
 .hero-panel::after { content: ""; position: absolute; z-index: -1; top: 0; bottom: 0; right: 0; left: -100vw; pointer-events: none;
   background: url("patterns/03_vzglyad_B.svg") 0 0/var(--pat-size) repeat; opacity: var(--pat-opacity-hero); }
+.hero-img { position: relative; min-width: 0; min-height: 0; }
+.hero-img .photo-ph { height: 100%; min-height: 480px; aspect-ratio: auto; font-size: 15px; border-radius: var(--photo-radius); }
+.hero-img .photo-ph::before { content: ""; position: absolute; inset: 0; background: var(--photo-hero-tint); pointer-events: none; border-radius: inherit; }
+.hero-img .photo-ph::after { content: "Фото: реальная лабораторная съёмка, без фильтров · лёгкий тон #006CB4 только здесь"; }
 .hero .eyebrow { margin-bottom: 28px; }
 /* «нейроисследования:» — одно слово шириной ~10,9 em, кегль следует за шириной колонки */
 .hero h1 { margin-bottom: 28px; font-size: clamp(28px, calc(4.4vw - 6px), 52px); }
@@ -117,11 +118,11 @@ section.block:has(> .wrap > .nums)::before { content: ""; position: absolute; in
 .fbox .actions { display: flex; align-items: center; gap: 24px; }
 
 @media (max-width: 767px) {
-  .hero-img { position: relative; inset: auto; }
+  .hero-in { display: flex; flex-direction: column; gap: 0; min-height: 0; padding: 0; }
+  .hero-img { order: -1; }
   .hero-img .photo-ph::after { content: "Фото: реальная лабораторная съёмка, без фильтров"; }
   .hero-panel::after { -webkit-mask-image: linear-gradient(to bottom, transparent calc(100% - 44px), #000 calc(100% - 24px)); mask-image: linear-gradient(to bottom, transparent calc(100% - 44px), #000 calc(100% - 24px)); }
-  .hero-img .photo-ph { aspect-ratio: 4/3; height: auto; font-size: 13px; border-radius: var(--photo-radius); }
-  .hero-in { min-height: 0; }
+  .hero-img .photo-ph { aspect-ratio: 4/3; height: auto; min-height: 0; font-size: 13px; }
   .hero-panel { width: 100%; padding: 32px 0 48px; }
   .hero .eyebrow { margin-bottom: 18px; }
   .hero h1 { margin-bottom: 18px; font-size: clamp(22px, 7.1vw, 30px); }
@@ -175,6 +176,9 @@ section.block:has(> .wrap > .nums)::before { content: ""; position: absolute; in
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
+  .hero-in { gap: 28px; padding: 32px 0; min-height: 520px; }
+  .hero-panel { padding: 24px 0; }
+  .hero-img .photo-ph { min-height: 360px; font-size: 13px; }
   .task { grid-template-columns: 48px 1fr; gap: 16px; padding: 24px 20px; }
   .task h3 { font-size: 18px; }
   .dirs { grid-template-columns: 1fr; }
@@ -211,7 +215,6 @@ section.block:has(> .wrap > .nums)::before { content: ""; position: absolute; in
 
 <main id="main">
   <section class="hero">
-    <div class="hero-img"><div class="photo-ph"><span>Фото первого экрана: ЭЭГ-исследование в лаборатории НИИ — участник в ЭЭГ-шапочке перед монитором, рядом исследователь у системы записи<br>реальная съёмка, горизонталь от 1920 px, главное — в правой части кадра</span></div></div>
     <div class="wrap hero-in">
       <div class="hero-panel">
         <div class="eyebrow">Научно-исследовательский институт нейронаук</div>
@@ -219,6 +222,7 @@ section.block:has(> .wrap > .nums)::before { content: ""; position: absolute; in
         <p class="lead ph">Исследования и разработки на базе СамГМУ</p>
         <div class="hero-cta"><a class="btn" href="#obsudit-nir">Обсудить исследование</a><a class="link" href="#proekty">Смотреть проекты</a></div>
       </div>
+      <div class="hero-img"><div class="photo-ph"><span>Фото первого экрана: ЭЭГ-исследование в лаборатории НИИ — участник в ЭЭГ-шапочке перед монитором, рядом исследователь у системы записи<br>реальная съёмка, в колонке контента (не на всю ширину окна), скругление 12 px со всех сторон</span></div></div>
     </div>
   </section>
 
