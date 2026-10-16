@@ -34,8 +34,7 @@
 .share-top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 0; margin-top: 32px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .share { display: flex; align-items: center; gap: 8px; }
 .share > span { font-size: 14px; font-weight: 700; color: var(--muted); margin-right: 4px; }
-.sh { display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 14px; border: 1px solid var(--line); border-radius: var(--r); font-size: 14px; font-weight: 700; color: var(--text); background: #fff; }
-.sh b { font-size: 10px; font-weight: 700; color: var(--accent); width: 22px; height: 22px; border: 1px solid var(--line); border-radius: var(--r); display: grid; place-items: center; }
+.sh { display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 14px; border: 1px solid var(--line); border-radius: var(--r); font-size: 14px; font-weight: 700; color: var(--text); background: #fff; text-decoration: none; }
 .sh:hover, .sh.is-hover { border-color: var(--accent); color: var(--accent); }
 .sh.copy { color: var(--muted); }
 
@@ -183,9 +182,9 @@
         <div class="share-top">
           <div class="share" aria-label="Поделиться">
             <span>Поделиться</span>
-            <a class="sh" href="#"><b>TG</b>Telegram</a>
-            <a class="sh" href="#"><b>VK</b>VK</a>
-            <a class="sh" href="#"><b>MAX</b>MAX</a>
+            <a class="sh sh-tg" href="#"><i class="shi" aria-hidden="true"></i>Telegram</a>
+            <a class="sh sh-vk" href="#"><i class="shi" aria-hidden="true"></i>VK</a>
+            <a class="sh sh-max" href="#"><i class="shi" aria-hidden="true"></i>MAX</a>
             <a class="sh copy" href="#">Скопировать ссылку</a>
           </div>
         </div>
@@ -244,9 +243,9 @@
           <div class="share-end">
             <div class="share" aria-label="Поделиться">
               <span>Поделиться</span>
-              <a class="sh" href="#"><b>TG</b>Telegram</a>
-              <a class="sh" href="#"><b>VK</b>VK</a>
-              <a class="sh" href="#"><b>MAX</b>MAX</a>
+              <a class="sh sh-tg" href="#"><i class="shi" aria-hidden="true"></i>Telegram</a>
+              <a class="sh sh-vk" href="#"><i class="shi" aria-hidden="true"></i>VK</a>
+              <a class="sh sh-max" href="#"><i class="shi" aria-hidden="true"></i>MAX</a>
             </div>
             <a class="link back" href="10_новости.html">← Все новости</a>
           </div>
