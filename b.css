@@ -103,7 +103,7 @@ nav a:not(.btn).on { color: var(--accent); border-bottom-color: transparent; }
   background: var(--chi-i) center / contain no-repeat; }
 .chi-tg { --chi-i: url("img/soc/telegram.png"); }
 .chi-max { --chi-i: url("img/soc/max.png"); }
-.chi-vk { --chi-i: url("img/soc/vk.png"); }
+.chi-vk { --chi-i: url("img/soc/vk_logo_color_36.png"); }
 .chi-dz { --chi-i: url("img/soc/dzen.png"); }
 .chi.lg { width: 48px; height: 48px; }
 
@@ -111,7 +111,7 @@ nav a:not(.btn).on { color: var(--accent); border-bottom-color: transparent; }
 .sh .shi { width: 22px; height: 22px; flex: none; border-radius: 4px; background: center / contain no-repeat; }
 .sh-tg .shi { background-image: url("img/soc/telegram.png"); }
 .sh-max .shi { background-image: url("img/soc/max.png"); }
-.sh-vk .shi { background-image: url("img/soc/vk.png"); }
+.sh-vk .shi { background-image: url("img/soc/vk_logo_color_36.png"); }
 
 /* Кнопки */
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: var(--accent); color: #fff; font-weight: 600; font-size: 16px; line-height: 1.2; padding: 15px 28px; min-height: var(--target-min); border: 0; border-radius: var(--r-md); cursor: pointer; transition: background .2s; }
