@@ -25,7 +25,7 @@
   --g-strip-h:3px;
 
   /* Паттерны: масштаб 1:1 (плитка 600 px); пониженная непрозрачность — паттерн тише фона */
-  --pat-size:600px; --pat-opacity-hero:.28; --pat-opacity-band:.25; --pat-opacity-zone:.22;
+  --pat-size:600px; --pat-opacity-hero:.16; --pat-opacity-band:.14; --pat-opacity-zone:.12;
 
   /* Фото */
   --photo-radius:12px; --photo-hero-tint:rgba(0,108,180,.08);
