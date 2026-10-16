@@ -96,10 +96,17 @@ nav a:not(.btn).on { color: var(--accent); border-bottom-color: transparent; }
   #menu .nav-cta:hover { border-bottom: 0; color: #fff; }
 }
 
-/* Иконки каналов: временные монограммы до получения официальных знаков платформ */
+/* Иконки каналов: SVG-знаки платформ (монохром через mask → currentColor) */
 .chs { display: flex; gap: 6px; }
-.chi { width: 32px; height: 32px; border: 1px solid var(--line); border-radius: var(--r-sm); display: grid; place-items: center; font-size: 10px; font-weight: 700; color: var(--accent); background: #fff; flex: none; }
-.chi.lg { width: 48px; height: 48px; font-size: 13px; }
+.chi { width: 32px; height: 32px; border: 1px solid var(--line); border-radius: var(--r-sm); display: grid; place-items: center; color: var(--accent); background: #fff; flex: none; font-size: 0; line-height: 0; text-decoration: none; }
+.chi::before { content: ""; display: block; width: 18px; height: 18px; background: currentColor;
+  -webkit-mask: var(--chi-i) center / contain no-repeat; mask: var(--chi-i) center / contain no-repeat; }
+.chi-tg { --chi-i: url("img/soc/telegram.svg"); }
+.chi-max { --chi-i: url("img/soc/max.svg"); }
+.chi-vk { --chi-i: url("img/soc/vk.svg"); }
+.chi-dz { --chi-i: url("img/soc/dzen.svg"); }
+.chi.lg { width: 48px; height: 48px; }
+.chi.lg::before { width: 26px; height: 26px; }
 
 /* Кнопки */
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: var(--accent); color: #fff; font-weight: 600; font-size: 16px; line-height: 1.2; padding: 15px 28px; min-height: var(--target-min); border: 0; border-radius: var(--r-md); cursor: pointer; transition: background .2s; }
