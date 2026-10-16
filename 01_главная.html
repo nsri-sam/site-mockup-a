@@ -8,14 +8,13 @@
 <title>Главная — макет сайта, вариант А</title>
 <link rel="stylesheet" href="b.css">
 <style>
-.hero { position: relative; border-bottom: 1px solid var(--line); }
-/* фото внутри .wrap: рамка не выходит за центральную колонку (max 1280 px) */
-/* padding-block — боковые 40 px от .wrap сохраняются, иначе фото уезжает правее шапки и блоков */
-.hero-in { position: relative; display: grid; grid-template-columns: 1.05fr 1fr; gap: 40px; align-items: stretch; min-height: 600px; padding-block: 40px; }
-.hero-panel { padding: 48px 8px 48px 0; display: flex; flex-direction: column; justify-content: center; position: relative; isolation: isolate; min-width: 0; }
-.hero-panel::before { content: ""; position: absolute; top: 0; bottom: 0; right: 100%; width: 100vw; background: #fff; }
-/* паттерн 03 «Взгляд» — под текстовой колонкой, не под фото */
-.hero-panel::after { content: ""; position: absolute; z-index: -1; top: 0; bottom: 0; right: 0; left: -100vw; pointer-events: none;
+.hero { position: relative; border-bottom: 1px solid var(--line); overflow-x: clip; }
+/* фото внутри .wrap: правый край совпадает с шапкой; текст шире, чтобы заголовок не ломался */
+/* padding-block — боковые 40 px от .wrap сохраняются */
+.hero-in { position: relative; display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.9fr); gap: 40px; align-items: stretch; min-height: 600px; padding-block: 40px; }
+.hero-panel { padding: 48px 24px 48px 0; display: flex; flex-direction: column; justify-content: center; position: relative; isolation: isolate; min-width: 0; }
+/* паттерн 03 «Взгляд» только под текстом — без left:-100vw (иначе страница раздувается и контент уезжает вправо) */
+.hero-panel::after { content: ""; position: absolute; z-index: -1; inset: 0; pointer-events: none;
   background: url("patterns/03_vzglyad_B.svg") 0 0/var(--pat-size) repeat; opacity: var(--pat-opacity-hero); }
 .hero-img { position: relative; min-width: 0; min-height: 0; }
 .hero-img .photo-ph { height: 100%; min-height: 480px; aspect-ratio: auto; font-size: 15px; border-radius: var(--photo-radius); }
